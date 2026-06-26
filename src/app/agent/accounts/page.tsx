@@ -22,7 +22,7 @@ export default async function AccountsPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="bg-white rounded-lg shadow-sm border p-6">
           <p className="text-sm text-gray-500">Total Bookings Value</p>
-          <p className="text-2xl font-bold text-[#0F172A]">PKR {totalBookings.toLocaleString()}</p>
+          <p className="text-2xl font-bold text-[#0c1d4a]">PKR {totalBookings.toLocaleString()}</p>
         </div>
         <div className="bg-white rounded-lg shadow-sm border p-6">
           <p className="text-sm text-gray-500">Total Paid</p>
@@ -30,7 +30,7 @@ export default async function AccountsPage() {
         </div>
         <div className="bg-white rounded-lg shadow-sm border p-6">
           <p className="text-sm text-gray-500">Closing Balance</p>
-          <p className="text-2xl font-bold text-[#F97316]">PKR {balance.toLocaleString()}</p>
+          <p className="text-2xl font-bold text-[#dc2626]">PKR {balance.toLocaleString()}</p>
         </div>
       </div>
 

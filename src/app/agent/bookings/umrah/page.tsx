@@ -35,7 +35,7 @@ export default async function UmrahBookingsPage() {
               <input type="number" name="infants" min={0} defaultValue={0} className="w-full px-3 py-2 border rounded-md" />
             </div>
             <div className="flex items-end">
-              <button type="submit" className="bg-[#F97316] hover:bg-[#ea580c] text-white px-4 py-2 rounded-md text-sm font-medium">Book Umrah</button>
+              <button type="submit" className="bg-[#dc2626] hover:bg-[#b91c1c] text-white px-4 py-2 rounded-md text-sm font-medium">Book Umrah</button>
             </div>
           </form>
         </div>

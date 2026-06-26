@@ -19,10 +19,10 @@ export default async function AgentDashboardPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-[#0F172A]">Dashboard</h1>
+      <h1 className="text-2xl font-bold text-[#0c1d4a]">Dashboard</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Link href="/agent/bookings/umrah" className="bg-[#F97316] text-white rounded-lg p-5 hover:shadow-md transition-shadow">
+        <Link href="/agent/bookings/umrah" className="bg-[#dc2626] text-white rounded-lg p-5 hover:shadow-md transition-shadow">
           <div className="flex items-start justify-between">
             <div>
               <h3 className="font-bold text-lg">Umrah Groups</h3>
@@ -74,7 +74,7 @@ export default async function AgentDashboardPage() {
                 type="text"
                 name="agency_name"
                 defaultValue={agent.agency_name || ""}
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#F97316]"
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
               />
             </div>
             <div>
@@ -92,7 +92,7 @@ export default async function AgentDashboardPage() {
                 type="text"
                 name="contact_person"
                 defaultValue={agent.contact_person || ""}
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#F97316]"
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
               />
             </div>
             <div>
@@ -101,7 +101,7 @@ export default async function AgentDashboardPage() {
                 type="text"
                 name="phone"
                 defaultValue={agent.phone || ""}
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#F97316]"
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
               />
             </div>
             <div>
@@ -110,7 +110,7 @@ export default async function AgentDashboardPage() {
                 type="text"
                 name="city"
                 defaultValue={agent.city || ""}
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#F97316]"
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
               />
             </div>
             <div>
@@ -119,13 +119,13 @@ export default async function AgentDashboardPage() {
                 type="text"
                 name="country"
                 defaultValue={agent.country || ""}
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#F97316]"
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
               />
             </div>
             <div className="md:col-span-3">
               <button
                 type="submit"
-                className="bg-[#F97316] hover:bg-[#ea580c] text-white px-6 py-2 rounded-md font-medium transition-colors"
+                className="bg-[#dc2626] hover:bg-[#b91c1c] text-white px-6 py-2 rounded-md font-medium transition-colors"
               >
                 Update
               </button>

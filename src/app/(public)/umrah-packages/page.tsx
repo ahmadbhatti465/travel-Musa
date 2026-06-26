@@ -7,7 +7,7 @@ export default function UmrahPackagesPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
-        <h1 className="text-3xl font-bold text-[#0F172A] mb-4">Umrah Packages</h1>
+        <h1 className="text-3xl font-bold text-[#0c1d4a] mb-4">Umrah Packages</h1>
         <p className="text-gray-600">Choose from our wide range of Umrah packages with premium hotels and airlines.</p>
       </div>
 
@@ -17,12 +17,12 @@ export default function UmrahPackagesPage() {
             {pkg.image_url && (
               <img src={pkg.image_url} alt={pkg.title} className="w-full h-48 object-cover" />
             )}
-            <div className="bg-[#F97316] text-white px-4 py-3 flex items-center justify-between">
+            <div className="bg-[#dc2626] text-white px-4 py-3 flex items-center justify-between">
               <span className="font-bold">{pkg.airline}</span>
               <span className="text-sm">{pkg.days} Days</span>
             </div>
             <div className="p-5">
-              <h3 className="text-lg font-bold text-[#0F172A] mb-2">{pkg.title}</h3>
+              <h3 className="text-lg font-bold text-[#0c1d4a] mb-2">{pkg.title}</h3>
               <div className="space-y-2 text-sm text-gray-600 mb-4">
                 <p><strong>Departure:</strong> {pkg.departure_date}</p>
                 <p><strong>Return:</strong> {pkg.return_date}</p>
@@ -32,11 +32,11 @@ export default function UmrahPackagesPage() {
               <div className="flex items-center justify-between pt-4 border-t">
                 <div>
                   <p className="text-xs text-gray-500">Starting from</p>
-                  <p className="text-xl font-bold text-[#F97316]">PKR {pkg.price.toLocaleString()}</p>
+                  <p className="text-xl font-bold text-[#dc2626]">PKR {pkg.price.toLocaleString()}</p>
                 </div>
                 <Link
                   href="/agent/login"
-                  className="bg-[#F97316] hover:bg-[#ea580c] text-white px-4 py-2 rounded text-sm font-medium transition-colors"
+                  className="bg-[#dc2626] hover:bg-[#b91c1c] text-white px-4 py-2 rounded text-sm font-medium transition-colors"
                 >
                   Book Now
                 </Link>

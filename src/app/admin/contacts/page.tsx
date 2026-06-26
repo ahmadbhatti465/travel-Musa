@@ -38,7 +38,7 @@ export default function AdminContactsPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-[#0F172A] mb-6">Contact Messages</h1>
+      <h1 className="text-2xl font-bold text-[#0c1d4a] mb-6">Contact Messages</h1>
       <div className="bg-white rounded-lg shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">

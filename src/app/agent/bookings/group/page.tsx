@@ -37,7 +37,7 @@ export default async function GroupBookingsPage() {
               <input type="number" name="infants" min={0} defaultValue={0} className="w-full px-3 py-2 border rounded-md" />
             </div>
             <div className="flex items-end">
-              <button type="submit" className="bg-[#F97316] hover:bg-[#ea580c] text-white px-4 py-2 rounded-md text-sm font-medium">Create Booking</button>
+              <button type="submit" className="bg-[#dc2626] hover:bg-[#b91c1c] text-white px-4 py-2 rounded-md text-sm font-medium">Create Booking</button>
             </div>
           </form>
         </div>

@@ -198,20 +198,20 @@ export default function PackageBookingClient({
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-[#0F172A]">Package Booking</h1>
+      <h1 className="text-2xl font-bold text-[#0c1d4a]">Package Booking</h1>
 
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Filter Sidebar */}
         <aside className="w-full lg:w-64 shrink-0 space-y-5">
           <div className="bg-white rounded-lg shadow-sm border p-4">
             <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2 text-sm font-semibold text-[#0F172A]">
+              <div className="flex items-center gap-2 text-sm font-semibold text-[#0c1d4a]">
                 <Filter size={16} /> Filters
               </div>
               {hasActiveFilters && (
                 <button
                   onClick={clearFilters}
-                  className="text-xs text-[#F97316] hover:underline"
+                  className="text-xs text-[#dc2626] hover:underline"
                 >
                   Clear all
                 </button>
@@ -227,13 +227,13 @@ export default function PackageBookingClient({
                 {allAirlines.map((airline) => (
                   <label
                     key={airline}
-                    className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer hover:text-[#F97316]"
+                    className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer hover:text-[#dc2626]"
                   >
                     <input
                       type="checkbox"
                       checked={selectedAirlines.includes(airline)}
                       onChange={() => toggleAirline(airline)}
-                      className="rounded border-gray-300 text-[#F97316] focus:ring-[#F97316]"
+                      className="rounded border-gray-300 text-[#dc2626] focus:ring-[#dc2626]"
                     />
                     <Plane size={14} /> {airline}
                   </label>
@@ -252,14 +252,14 @@ export default function PackageBookingClient({
                   placeholder="Min"
                   value={minDays}
                   onChange={(e) => setMinDays(e.target.value)}
-                  className="w-full px-2 py-1.5 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]"
+                  className="w-full px-2 py-1.5 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
                 />
                 <input
                   type="number"
                   placeholder="Max"
                   value={maxDays}
                   onChange={(e) => setMaxDays(e.target.value)}
-                  className="w-full px-2 py-1.5 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]"
+                  className="w-full px-2 py-1.5 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
                 />
               </div>
             </div>
@@ -275,14 +275,14 @@ export default function PackageBookingClient({
                   placeholder="Min"
                   value={minPrice}
                   onChange={(e) => setMinPrice(e.target.value)}
-                  className="w-full px-2 py-1.5 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]"
+                  className="w-full px-2 py-1.5 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
                 />
                 <input
                   type="number"
                   placeholder="Max"
                   value={maxPrice}
                   onChange={(e) => setMaxPrice(e.target.value)}
-                  className="w-full px-2 py-1.5 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]"
+                  className="w-full px-2 py-1.5 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
                 />
               </div>
             </div>
@@ -311,13 +311,13 @@ export default function PackageBookingClient({
                         alt={pkg.title}
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-[#0F172A] px-2.5 py-1 rounded-md text-xs font-semibold shadow-sm flex items-center gap-1">
+                      <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-[#0c1d4a] px-2.5 py-1 rounded-md text-xs font-semibold shadow-sm flex items-center gap-1">
                         <Plane size={12} /> {pkg.airline}
                       </div>
                     </div>
 
                     <div className="p-4 flex-1 flex flex-col">
-                      <h3 className="text-base font-bold text-[#0F172A] mb-2">
+                      <h3 className="text-base font-bold text-[#0c1d4a] mb-2">
                         {pkg.title}
                       </h3>
 
@@ -326,7 +326,7 @@ export default function PackageBookingClient({
                           <p className="text-[10px] text-gray-500 uppercase tracking-wide">
                             Departure
                           </p>
-                          <p className="text-xs font-semibold text-[#0F172A]">
+                          <p className="text-xs font-semibold text-[#0c1d4a]">
                             {pkg.departure_date}
                           </p>
                         </div>
@@ -334,7 +334,7 @@ export default function PackageBookingClient({
                           <p className="text-[10px] text-gray-500 uppercase tracking-wide">
                             Return
                           </p>
-                          <p className="text-xs font-semibold text-[#0F172A]">
+                          <p className="text-xs font-semibold text-[#0c1d4a]">
                             {pkg.return_date}
                           </p>
                         </div>
@@ -342,7 +342,7 @@ export default function PackageBookingClient({
                           <p className="text-[10px] text-gray-500 uppercase tracking-wide">
                             Days
                           </p>
-                          <p className="text-xs font-semibold text-[#0F172A]">
+                          <p className="text-xs font-semibold text-[#0c1d4a]">
                             {pkg.days}
                           </p>
                         </div>
@@ -350,7 +350,7 @@ export default function PackageBookingClient({
 
                       <div className="space-y-1.5 mb-3">
                         <div className="flex items-start gap-2 text-xs text-gray-600">
-                          <Building2 size={14} className="text-[#F97316] mt-0.5 shrink-0" />
+                          <Building2 size={14} className="text-[#dc2626] mt-0.5 shrink-0" />
                           <span>
                             <span className="font-medium text-gray-800">Makkah:</span>{" "}
                             {pkg.hotel_makkah || "N/A"}
@@ -380,7 +380,7 @@ export default function PackageBookingClient({
                           ].map((r) => (
                             <div key={r.key} className="py-2">
                               <p className="text-[10px] text-gray-500">{r.label}</p>
-                              <p className="text-xs font-bold text-[#0F172A]">
+                              <p className="text-xs font-bold text-[#0c1d4a]">
                                 {r.val > 0 ? r.val.toLocaleString() : "-"}
                               </p>
                             </div>
@@ -391,13 +391,13 @@ export default function PackageBookingClient({
                       <div className="mt-auto flex items-center justify-between pt-2">
                         <div>
                           <p className="text-[10px] text-gray-500">Starting from</p>
-                          <p className="text-lg font-bold text-[#F97316]">
+                          <p className="text-lg font-bold text-[#dc2626]">
                             PKR {pkg.price.toLocaleString()}
                           </p>
                         </div>
                         <button
                           onClick={() => openBookModal(pkg)}
-                          className="bg-[#F97316] hover:bg-[#ea580c] text-white px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1"
+                          className="bg-[#dc2626] hover:bg-[#b91c1c] text-white px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1"
                         >
                           Book Now <ArrowRight size={14} />
                         </button>
@@ -484,9 +484,9 @@ export default function PackageBookingClient({
           {selectedPkg && (
             <form onSubmit={handleBooking} className="space-y-4">
               <div className="bg-gray-50 rounded-md p-3 text-sm">
-                <p className="font-semibold text-[#0F172A]">{selectedPkg.title}</p>
+                <p className="font-semibold text-[#0c1d4a]">{selectedPkg.title}</p>
                 <p className="text-gray-500 text-xs mt-1">
-                  {selectedPkg.airline} · {selectedPkg.days} Days ·{" "}
+                  {selectedPkg.airline} Â· {selectedPkg.days} Days Â·{" "}
                   {selectedPkg.departure_date}
                 </p>
               </div>
@@ -498,34 +498,34 @@ export default function PackageBookingClient({
                 <select
                   value={roomType}
                   onChange={(e) => setRoomType(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]"
+                  className="w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
                 >
                   <option value="sharing">
-                    Sharing — PKR{" "}
+                    Sharing &mdash; PKR{" "}
                     {(
                       selectedPkg.sharing_price || selectedPkg.price
                     ).toLocaleString()}
                   </option>
                   <option value="double">
-                    Double — PKR{" "}
+                    Double &mdash; PKR{“ “}
                     {(
                       selectedPkg.double_price || selectedPkg.price
                     ).toLocaleString()}
                   </option>
                   <option value="triple">
-                    Triple — PKR{" "}
+                    Triple &mdash; PKR{“ “}
                     {(
                       selectedPkg.triple_price || selectedPkg.price
                     ).toLocaleString()}
                   </option>
                   <option value="quad">
-                    Quad — PKR{" "}
+                    Quad &mdash; PKR{“ “}
                     {(
                       selectedPkg.quad_price || selectedPkg.price
                     ).toLocaleString()}
                   </option>
                   <option value="quint">
-                    Quint — PKR{" "}
+                    Quint &mdash; PKR{“ “}
                     {(
                       selectedPkg.quint_price || selectedPkg.price
                     ).toLocaleString()}
@@ -543,7 +543,7 @@ export default function PackageBookingClient({
                     min={1}
                     value={adults}
                     onChange={(e) => setAdults(Number(e.target.value))}
-                    className="w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]"
+                    className="w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
                     required
                   />
                 </div>
@@ -556,14 +556,14 @@ export default function PackageBookingClient({
                     min={0}
                     value={infants}
                     onChange={(e) => setInfants(Number(e.target.value))}
-                    className="w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]"
+                    className="w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
                   />
                 </div>
               </div>
 
-              <div className="flex items-center justify-between bg-[#F97316]/10 rounded-md p-3">
-                <span className="text-sm font-medium text-[#0F172A]">Total Amount</span>
-                <span className="text-lg font-bold text-[#F97316]">
+              <div className="flex items-center justify-between bg-[#dc2626]/10 rounded-md p-3">
+                <span className="text-sm font-medium text-[#0c1d4a]">Total Amount</span>
+                <span className="text-lg font-bold text-[#dc2626]">
                   PKR {previewTotal.toLocaleString()}
                 </span>
               </div>
@@ -589,7 +589,7 @@ export default function PackageBookingClient({
                 <button
                   type="submit"
                   disabled={bookingLoading || bookingSuccess}
-                  className="px-4 py-2 bg-[#F97316] text-white rounded-md text-sm hover:bg-[#ea580c] transition-colors disabled:opacity-50"
+                  className="px-4 py-2 bg-[#dc2626] text-white rounded-md text-sm hover:bg-[#b91c1c] transition-colors disabled:opacity-50"
                 >
                   {bookingLoading ? "Booking..." : "Confirm Booking"}
                 </button>

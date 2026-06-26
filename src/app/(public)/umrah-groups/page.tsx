@@ -7,7 +7,7 @@ export default function UmrahGroupsPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
-        <h1 className="text-3xl font-bold text-[#0F172A] mb-4">Umrah Groups</h1>
+        <h1 className="text-3xl font-bold text-[#0c1d4a] mb-4">Umrah Groups</h1>
         <p className="text-gray-600">Join our organized Umrah groups with experienced guides and premium services.</p>
       </div>
 
@@ -24,8 +24,8 @@ export default function UmrahGroupsPage() {
               <p className="text-sm"><strong>Days:</strong> {g.days}</p>
               <p className="text-sm"><strong>Seats Available:</strong> {g.available_seats}/{g.seats}</p>
               <div className="flex items-center justify-between pt-3 border-t">
-                <span className="text-xl font-bold text-[#F97316]">PKR {g.price.toLocaleString()}</span>
-                <Link href="/agent/login" className="bg-[#F97316] hover:bg-[#ea580c] text-white px-3 py-1.5 rounded text-sm transition-colors">Book</Link>
+                <span className="text-xl font-bold text-[#dc2626]">PKR {g.price.toLocaleString()}</span>
+                <Link href="/agent/login" className="bg-[#dc2626] hover:bg-[#b91c1c] text-white px-3 py-1.5 rounded text-sm transition-colors">Book</Link>
               </div>
             </div>
           </div>

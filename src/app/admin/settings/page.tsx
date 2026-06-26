@@ -18,7 +18,7 @@ export default function AdminSettingsPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-[#0F172A] mb-6">Settings</h1>
+      <h1 className="text-2xl font-bold text-[#0c1d4a] mb-6">Settings</h1>
       <div className="bg-white rounded-lg shadow-sm p-6 max-w-2xl">
         <h2 className="text-lg font-bold mb-4">System Settings</h2>
         <div className="space-y-4">

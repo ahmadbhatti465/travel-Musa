@@ -185,6 +185,26 @@ export function initDb() {
       role TEXT DEFAULT 'admin',
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
+
+    CREATE TABLE IF NOT EXISTS tickets (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      airline TEXT NOT NULL,
+      flight_no TEXT NOT NULL,
+      from_city TEXT NOT NULL,
+      to_city TEXT NOT NULL,
+      departure_date TEXT NOT NULL,
+      departure_time TEXT,
+      return_date TEXT,
+      return_time TEXT,
+      class TEXT DEFAULT 'economy',
+      ticket_type TEXT DEFAULT 'oneway',
+      price REAL NOT NULL,
+      seats INTEGER DEFAULT 0,
+      available_seats INTEGER DEFAULT 0,
+      status TEXT DEFAULT 'active',
+      notes TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
   `);
 
   // Migration: add missing columns to umrah_packages
@@ -214,6 +234,9 @@ export function initDb() {
   const bookColNames = bookCols.map((c) => c.name);
   if (!bookColNames.includes('room_type')) {
     db.exec(`ALTER TABLE bookings ADD COLUMN room_type TEXT`);
+  }
+  if (!bookColNames.includes('ticket_id')) {
+    db.exec(`ALTER TABLE bookings ADD COLUMN ticket_id INTEGER`);
   }
 }
 
@@ -281,6 +304,19 @@ export function seedDb() {
     db.prepare(`INSERT INTO downloads (title, file_url, category) VALUES (?, ?, ?)`).run('Umrah Packages Brochure 2026', '/downloads/brochure.pdf', 'Brochure');
     db.prepare(`INSERT INTO downloads (title, file_url, category) VALUES (?, ?, ?)`).run('Rate Sheet July 2026', '/downloads/rates-july.pdf', 'Rates');
     db.prepare(`INSERT INTO downloads (title, file_url, category) VALUES (?, ?, ?)`).run('Agent Terms & Conditions', '/downloads/terms.pdf', 'Legal');
+  }
+
+  const ticketCount = db.prepare('SELECT COUNT(*) as count FROM tickets').get() as { count: number };
+  if (ticketCount.count === 0) {
+    const tickets = [
+      ['Saudia', 'SV-721', 'Lahore', 'Jeddah', '2026-07-15', '03:30', null, null, 'economy', 'oneway', 85000, 50, 50],
+      ['PIA', 'PK-743', 'Karachi', 'Jeddah', '2026-07-18', '06:00', null, null, 'economy', 'oneway', 78000, 40, 40],
+      ['Airblue', 'PA-220', 'Islamabad', 'Jeddah', '2026-08-02', '09:15', null, null, 'business', 'oneway', 145000, 20, 20],
+      ['Saudia', 'SV-722', 'Jeddah', 'Lahore', '2026-07-25', '14:00', null, null, 'economy', 'oneway', 82000, 50, 50],
+      ['SereneAir', 'ER-812', 'Lahore', 'Jeddah', '2026-08-10', '11:45', '2026-08-20', '22:30', 'economy', 'round', 175000, 30, 30],
+    ];
+    const insertTicket = db.prepare(`INSERT INTO tickets (airline, flight_no, from_city, to_city, departure_date, departure_time, return_date, return_time, class, ticket_type, price, seats, available_seats) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
+    for (const t of tickets) insertTicket.run(...t);
   }
 }
 

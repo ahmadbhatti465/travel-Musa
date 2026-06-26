@@ -50,17 +50,17 @@ export default function ChangePasswordPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
-            <input type="password" value={current} onChange={(e) => setCurrent(e.target.value)} required className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#F97316] outline-none" />
+            <input type="password" value={current} onChange={(e) => setCurrent(e.target.value)} required className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#dc2626] outline-none" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">New Password</label>
-            <input type="password" value={newPass} onChange={(e) => setNewPass(e.target.value)} required minLength={6} className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#F97316] outline-none" />
+            <input type="password" value={newPass} onChange={(e) => setNewPass(e.target.value)} required minLength={6} className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#dc2626] outline-none" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
-            <input type="password" value={confirm} onChange={(e) => setConfirm(e.target.value)} required className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#F97316] outline-none" />
+            <input type="password" value={confirm} onChange={(e) => setConfirm(e.target.value)} required className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#dc2626] outline-none" />
           </div>
-          <button type="submit" className="bg-[#F97316] hover:bg-[#ea580c] text-white px-6 py-2 rounded-md font-medium">
+          <button type="submit" className="bg-[#dc2626] hover:bg-[#b91c1c] text-white px-6 py-2 rounded-md font-medium">
             Change Password
           </button>
         </form>

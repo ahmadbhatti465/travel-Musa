@@ -38,7 +38,7 @@ export default function AgentLoginPage() {
 
   return (
     <div className="min-h-screen flex">
-      <div className="hidden lg:flex flex-1 bg-[#0F172A] items-center justify-center relative">
+      <div className="hidden lg:flex flex-1 bg-[#1e3a8a] items-center justify-center relative">
         <div
           className="absolute inset-0 opacity-30 bg-cover bg-center"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542317805-56f3415e0e94?w=1600&auto=format&fit=crop')" }}
@@ -54,8 +54,8 @@ export default function AgentLoginPage() {
         <div className="w-full max-w-md">
           <div className="bg-white rounded-lg shadow-lg p-8">
             <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-[#F97316] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">U</div>
-              <h2 className="text-xl font-bold text-[#0F172A]">Agent Login</h2>
+              <img src="/logo.jpeg" alt="Musa Travel Service" className="h-20 w-auto rounded-lg bg-white p-1 object-contain mx-auto mb-4" />
+              <h2 className="text-xl font-bold text-[#0c1d4a]">Agent Login</h2>
               <p className="text-sm text-gray-500">Enter your credentials to access the agent portal</p>
             </div>
 
@@ -70,7 +70,7 @@ export default function AgentLoginPage() {
                   type="text"
                   value={code}
                   onChange={(e) => setCode(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#F97316]"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
                   placeholder="7902"
                   required
                 />
@@ -82,7 +82,7 @@ export default function AgentLoginPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#F97316]"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
                   placeholder="hafizmuhammadsiddique7@gmail.com"
                   required
                 />
@@ -95,7 +95,7 @@ export default function AgentLoginPage() {
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#F97316] pr-10"
+                    className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#dc2626] pr-10"
                     placeholder="Enter password"
                     required
                   />
@@ -112,14 +112,14 @@ export default function AgentLoginPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#F97316] hover:bg-[#ea580c] text-white py-2.5 rounded-md font-medium transition-colors disabled:opacity-50"
+                className="w-full bg-[#dc2626] hover:bg-[#b91c1c] text-white py-2.5 rounded-md font-medium transition-colors disabled:opacity-50"
               >
                 {loading ? "Signing in..." : "Sign In"}
               </button>
             </form>
 
             <div className="mt-6 text-center">
-              <a href="/" className="text-sm text-gray-500 hover:text-[#F97316]">← Back to Website</a>
+              <a href="/" className="text-sm text-gray-500 hover:text-[#dc2626]">&larr; Back to Website</a>
             </div>
           </div>
         </div>

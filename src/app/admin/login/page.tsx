@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff, Shield } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function AdminLoginPage() {
   const [username, setUsername] = useState("");
@@ -36,14 +36,12 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0F172A] px-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#1e3a8a] px-4">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-lg shadow-lg p-8">
           <div className="text-center mb-6">
-            <div className="w-16 h-16 bg-[#F97316] rounded-full flex items-center justify-center text-white mx-auto mb-4">
-              <Shield size={28} />
-            </div>
-            <h2 className="text-xl font-bold text-[#0F172A]">Admin Login</h2>
+            <img src="/logo.jpeg" alt="Musa Travel Service" className="h-20 w-auto rounded-lg bg-white p-1 object-contain mx-auto mb-4" />
+            <h2 className="text-xl font-bold text-[#0c1d4a]">Admin Login</h2>
             <p className="text-sm text-gray-500">Enter your credentials to access the admin panel</p>
           </div>
 
@@ -58,7 +56,7 @@ export default function AdminLoginPage() {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#F97316]"
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
                 placeholder="admin"
                 required
               />
@@ -71,7 +69,7 @@ export default function AdminLoginPage() {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#F97316] pr-10"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#dc2626] pr-10"
                   placeholder="Enter password"
                   required
                 />
@@ -88,14 +86,14 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#F97316] hover:bg-[#ea580c] text-white py-2.5 rounded-md font-medium transition-colors disabled:opacity-50"
+              className="w-full bg-[#dc2626] hover:bg-[#b91c1c] text-white py-2.5 rounded-md font-medium transition-colors disabled:opacity-50"
             >
               {loading ? "Signing in..." : "Sign In"}
             </button>
           </form>
 
           <div className="mt-6 text-center">
-            <a href="/" className="text-sm text-gray-500 hover:text-[#F97316]">← Back to Website</a>
+            <a href="/" className="text-sm text-gray-500 hover:text-[#dc2626]">&larr; Back to Website</a>
           </div>
         </div>
       </div>

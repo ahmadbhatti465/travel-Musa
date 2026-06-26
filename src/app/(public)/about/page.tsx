@@ -4,7 +4,7 @@ export default function AboutPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
-        <h1 className="text-3xl font-bold text-[#0F172A] mb-4">About Upsky Group of Travels</h1>
+        <h1 className="text-3xl font-bold text-[#0c1d4a] mb-4">About Upsky Group of Travels</h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
           We are a leading travel agency specializing in Hajj & Umrah services, providing premium travel experiences to pilgrims from Pakistan.
         </p>
@@ -21,12 +21,12 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="bg-[#0F172A] text-white rounded-lg p-8 mb-12">
+      <div className="bg-[#1e3a8a] text-white rounded-lg p-8 mb-12">
         <h2 className="text-2xl font-bold mb-6 text-center">Our Branches Across Pakistan</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {["Faisalabad", "Lahore", "Karachi", "Islamabad", "Peshawar", "Multan", "Rawalpindi", "Sialkot"].map((city) => (
             <div key={city} className="bg-white/10 rounded-md p-4">
-              <MapPin className="mx-auto mb-2 text-[#F97316]" size={20} />
+              <MapPin className="mx-auto mb-2 text-[#dc2626]" size={20} />
               <p className="font-medium">{city}</p>
             </div>
           ))}

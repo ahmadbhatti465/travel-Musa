@@ -22,8 +22,8 @@ export default function UmrahCalculatorPage() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-12">
       <div className="text-center mb-10">
-        <h1 className="text-3xl font-bold text-[#0F172A] mb-2 flex items-center justify-center gap-2">
-          <Calculator className="text-[#F97316]" /> Umrah Calculator
+        <h1 className="text-3xl font-bold text-[#0c1d4a] mb-2 flex items-center justify-center gap-2">
+          <Calculator className="text-[#dc2626]" /> Umrah Calculator
         </h1>
         <p className="text-gray-600">Calculate estimated costs for your Umrah package.</p>
       </div>
@@ -106,7 +106,7 @@ export default function UmrahCalculatorPage() {
           </div>
         </div>
 
-        <div className="bg-[#0F172A] text-white rounded-lg p-6 text-center">
+        <div className="bg-[#1e3a8a] text-white rounded-lg p-6 text-center">
           <p className="text-sm mb-1">Estimated Total Cost</p>
           <p className="text-3xl font-bold">PKR {totalCost.toLocaleString()}</p>
         </div>

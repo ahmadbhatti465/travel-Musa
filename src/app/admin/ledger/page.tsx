@@ -331,10 +331,10 @@ export default function AdminLedgerPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <h1 className="text-2xl font-bold text-[#0F172A]">Client Ledger</h1>
+        <h1 className="text-2xl font-bold text-[#0c1d4a]">Client Ledger</h1>
         <button
           onClick={fetchBookings}
-          className="flex items-center gap-2 text-gray-500 hover:text-[#F97316] text-sm px-3 py-2 rounded-md border hover:border-[#F97316] transition-colors w-fit"
+          className="flex items-center gap-2 text-gray-500 hover:text-[#dc2626] text-sm px-3 py-2 rounded-md border hover:border-[#dc2626] transition-colors w-fit"
         >
           <RefreshCw size={16} /> Refresh
         </button>
@@ -347,7 +347,7 @@ export default function AdminLedgerPage() {
           placeholder="Search client by name..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full md:w-80 px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]"
+          className="w-full md:w-80 px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#dc2626]"
         />
       </div>
 
@@ -371,20 +371,20 @@ export default function AdminLedgerPage() {
                 className="cursor-pointer hover:bg-gray-50 transition-colors"
               >
                 <div className="flex items-center gap-4 p-5">
-                  <div className="w-12 h-12 rounded-full bg-[#F97316]/10 flex items-center justify-center shrink-0">
-                    <Users size={22} className="text-[#F97316]" />
+                  <div className="w-12 h-12 rounded-full bg-[#dc2626]/10 flex items-center justify-center shrink-0">
+                    <Users size={22} className="text-[#dc2626]" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-[#0F172A] text-base">
+                    <p className="font-semibold text-[#0c1d4a] text-base">
                       {agent.agent_name || `Agent #${agent.agent_id}`}
                     </p>
                     <p className="text-xs text-gray-500 mt-0.5">
-                      {agent.agent_email || "-"} · {agent.agent_phone || "-"}
+                      {agent.agent_email || "-"} Â· {agent.agent_phone || "-"}
                     </p>
                   </div>
                   <div className="flex items-center gap-4 shrink-0">
                     <div className="text-right">
-                      <p className="text-lg font-bold text-[#F97316]">
+                      <p className="text-lg font-bold text-[#dc2626]">
                         PKR {agent.total_amount.toLocaleString()}
                       </p>
                       <p className="text-[10px] text-gray-500">
@@ -397,7 +397,7 @@ export default function AdminLedgerPage() {
                           e.stopPropagation();
                           downloadAgentPDF(agent);
                         }}
-                        className="flex items-center gap-1.5 bg-[#F97316] hover:bg-[#ea580c] text-white px-3 py-1.5 rounded-md text-xs font-medium transition-colors"
+                        className="flex items-center gap-1.5 bg-[#dc2626] hover:bg-[#b91c1c] text-white px-3 py-1.5 rounded-md text-xs font-medium transition-colors"
                       >
                         <Download size={13} /> PDF
                       </button>
@@ -417,7 +417,7 @@ export default function AdminLedgerPage() {
                 <div className="border-t bg-gray-50/50 p-5">
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                      <thead className="bg-[#0F172A] text-white">
+                      <thead className="bg-[#1e3a8a] text-white">
                         <tr>
                           <th className="text-left px-4 py-2.5 text-xs font-medium">Ref#</th>
                           <th className="text-left px-4 py-2.5 text-xs font-medium">Type</th>
@@ -463,15 +463,15 @@ export default function AdminLedgerPage() {
                               <td className="px-4 py-3 min-w-[260px]">
                                 {isPackage && (
                                   <div className="space-y-1">
-                                    <p className="text-xs font-medium text-[#0F172A]">
+                                    <p className="text-xs font-medium text-[#0c1d4a]">
                                       {b.package_title || "-"}
                                     </p>
                                     <div className="flex items-center gap-1.5 text-[10px] text-gray-600">
-                                      <Plane size={10} className="text-[#F97316]" />
+                                      <Plane size={10} className="text-[#dc2626]" />
                                       {b.package_airline || "-"}
                                     </div>
                                     <div className="flex items-center gap-1.5 text-[10px] text-gray-600">
-                                      <Building2 size={10} className="text-[#F97316]" />
+                                      <Building2 size={10} className="text-[#dc2626]" />
                                       {b.hotel_makkah || "-"}
                                     </div>
                                     <div className="flex items-center gap-1.5 text-[10px] text-gray-600">
@@ -490,15 +490,15 @@ export default function AdminLedgerPage() {
                                 )}
                                 {isGroup && (
                                   <div className="space-y-1">
-                                    <p className="text-xs font-medium text-[#0F172A]">
+                                    <p className="text-xs font-medium text-[#0c1d4a]">
                                       {b.ow_group_title || "-"}
                                     </p>
                                     <div className="flex items-center gap-1.5 text-[10px] text-gray-600">
-                                      <MapPin size={10} className="text-[#F97316]" />
+                                      <MapPin size={10} className="text-[#dc2626]" />
                                       {b.ow_group_destination || "-"}
                                     </div>
                                     <div className="flex items-center gap-1.5 text-[10px] text-gray-600">
-                                      <Plane size={10} className="text-[#F97316]" />
+                                      <Plane size={10} className="text-[#dc2626]" />
                                       {b.ow_group_airline || "-"}
                                     </div>
                                     <div className="flex items-center gap-1.5 text-[10px] text-gray-600">
@@ -509,11 +509,11 @@ export default function AdminLedgerPage() {
                                 )}
                                 {isUmrah && (
                                   <div className="space-y-1">
-                                    <p className="text-xs font-medium text-[#0F172A]">
+                                    <p className="text-xs font-medium text-[#0c1d4a]">
                                       {b.umrah_group_title || "-"}
                                     </p>
                                     <div className="flex items-center gap-1.5 text-[10px] text-gray-600">
-                                      <Plane size={10} className="text-[#F97316]" />
+                                      <Plane size={10} className="text-[#dc2626]" />
                                       {b.umrah_group_airline || "-"}
                                     </div>
                                     <div className="flex items-center gap-1.5 text-[10px] text-gray-600">
@@ -526,7 +526,7 @@ export default function AdminLedgerPage() {
                                   </div>
                                 )}
                               </td>
-                              <td className="px-4 py-3 font-semibold text-[#F97316] whitespace-nowrap">
+                              <td className="px-4 py-3 font-semibold text-[#dc2626] whitespace-nowrap">
                                 PKR {Number(b.total_amount || 0).toLocaleString()}
                               </td>
                               <td className="px-4 py-3">
@@ -565,7 +565,7 @@ export default function AdminLedgerPage() {
                           .filter((b) => b.type === "package")
                           .map((b) => (
                             <div key={b.id} className="bg-white rounded-md border p-3">
-                              <p className="text-xs font-medium text-[#0F172A] mb-2">
+                              <p className="text-xs font-medium text-[#0c1d4a] mb-2">
                                 {b.package_title || "Package"} ({b.reference_id || "-"})
                               </p>
                               <div className="grid grid-cols-5 text-center divide-x border rounded-md overflow-hidden">
@@ -578,7 +578,7 @@ export default function AdminLedgerPage() {
                                 ].map((r) => (
                                   <div key={r.label} className="py-2">
                                     <p className="text-[9px] text-gray-500">{r.label}</p>
-                                    <p className="text-xs font-bold text-[#0F172A]">
+                                    <p className="text-xs font-bold text-[#0c1d4a]">
                                       {r.val > 0 ? r.val.toLocaleString() : "-"}
                                     </p>
                                   </div>

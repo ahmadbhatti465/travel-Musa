@@ -63,8 +63,8 @@ export default function AdminDownloadsPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-[#0F172A]">Downloads</h1>
-        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-2 bg-[#F97316] hover:bg-[#ea580c] text-white px-4 py-2 rounded-md text-sm font-medium"><Plus size={16} /> Add Download</button>
+        <h1 className="text-2xl font-bold text-[#0c1d4a]">Downloads</h1>
+        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-2 bg-[#dc2626] hover:bg-[#b91c1c] text-white px-4 py-2 rounded-md text-sm font-medium"><Plus size={16} /> Add Download</button>
       </div>
       {showForm && (
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
@@ -78,7 +78,7 @@ export default function AdminDownloadsPage() {
             <input placeholder="Category" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className="px-3 py-2 border rounded-md text-sm" />
             <div className="md:col-span-3 flex justify-end gap-2">
               <button type="button" onClick={resetForm} className="px-4 py-2 border rounded-md text-sm hover:bg-gray-50">Cancel</button>
-              <button type="submit" className="px-4 py-2 bg-[#F97316] text-white rounded-md text-sm hover:bg-[#ea580c]">{editing ? "Update" : "Create"}</button>
+              <button type="submit" className="px-4 py-2 bg-[#dc2626] text-white rounded-md text-sm hover:bg-[#b91c1c]">{editing ? "Update" : "Create"}</button>
             </div>
           </form>
         </div>

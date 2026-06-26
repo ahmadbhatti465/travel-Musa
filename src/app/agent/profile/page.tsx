@@ -25,26 +25,26 @@ export default async function ProfilePage() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Agency Name</label>
-              <input type="text" name="agency_name" defaultValue={agent?.agency_name || ""} className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#F97316] outline-none" />
+              <input type="text" name="agency_name" defaultValue={agent?.agency_name || ""} className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#dc2626] outline-none" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Contact Person</label>
-              <input type="text" name="contact_person" defaultValue={agent?.contact_person || ""} className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#F97316] outline-none" />
+              <input type="text" name="contact_person" defaultValue={agent?.contact_person || ""} className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#dc2626] outline-none" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-              <input type="text" name="phone" defaultValue={agent?.phone || ""} className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#F97316] outline-none" />
+              <input type="text" name="phone" defaultValue={agent?.phone || ""} className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#dc2626] outline-none" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">City</label>
-              <input type="text" name="city" defaultValue={agent?.city || ""} className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#F97316] outline-none" />
+              <input type="text" name="city" defaultValue={agent?.city || ""} className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#dc2626] outline-none" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Country</label>
-              <input type="text" name="country" defaultValue={agent?.country || ""} className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#F97316] outline-none" />
+              <input type="text" name="country" defaultValue={agent?.country || ""} className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#dc2626] outline-none" />
             </div>
           </div>
-          <button type="submit" className="bg-[#F97316] hover:bg-[#ea580c] text-white px-6 py-2 rounded-md font-medium">
+          <button type="submit" className="bg-[#dc2626] hover:bg-[#b91c1c] text-white px-6 py-2 rounded-md font-medium">
             Update Profile
           </button>
         </form>

@@ -97,10 +97,10 @@ export default function AdminAgentsPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-[#0F172A]">Agents Management</h1>
+        <h1 className="text-2xl font-bold text-[#0c1d4a]">Agents Management</h1>
         <button
           onClick={() => { resetForm(); setShowForm(true); }}
-          className="flex items-center gap-2 bg-[#F97316] hover:bg-[#ea580c] text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
+          className="flex items-center gap-2 bg-[#dc2626] hover:bg-[#b91c1c] text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
         >
           <Plus size={16} /> Add Agent
         </button>
@@ -108,23 +108,53 @@ export default function AdminAgentsPage() {
 
       {showForm && (
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-2">
             <h2 className="text-lg font-bold">{editing ? "Edit Agent" : "Add New Agent"}</h2>
             <button onClick={resetForm} className="text-gray-400 hover:text-gray-600"><X size={18} /></button>
           </div>
+          <p className="text-xs text-gray-500 mb-4">
+            The agent logs in with <strong>Agent Code</strong> + <strong>Email</strong> + <strong>Password</strong>. Share these three with the agent.
+          </p>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <input required placeholder="Agent Code" value={form.code} onChange={(e) => setForm({ ...form, code: e.target.value })} className="px-3 py-2 border rounded-md text-sm" />
-            <input required type="email" placeholder="Email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="px-3 py-2 border rounded-md text-sm" />
-            <input required={!editing} type="password" placeholder={editing ? "Leave blank to keep current" : "Password"} value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} className="px-3 py-2 border rounded-md text-sm" />
-            <input placeholder="Agency Name" value={form.agency_name} onChange={(e) => setForm({ ...form, agency_name: e.target.value })} className="px-3 py-2 border rounded-md text-sm" />
-            <input placeholder="Contact Person" value={form.contact_person} onChange={(e) => setForm({ ...form, contact_person: e.target.value })} className="px-3 py-2 border rounded-md text-sm" />
-            <input placeholder="Phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="px-3 py-2 border rounded-md text-sm" />
-            <input placeholder="City" value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} className="px-3 py-2 border rounded-md text-sm" />
-            <input placeholder="Country" value={form.country} onChange={(e) => setForm({ ...form, country: e.target.value })} className="px-3 py-2 border rounded-md text-sm" />
-            <input type="number" placeholder="Balance" value={form.balance} onChange={(e) => setForm({ ...form, balance: e.target.value })} className="px-3 py-2 border rounded-md text-sm" />
+            <div>
+              <label className="block text-xs font-semibold text-[#0c1d4a] mb-1">Agent Code (username) *</label>
+              <input required placeholder="e.g. 7902" value={form.code} onChange={(e) => setForm({ ...form, code: e.target.value })} className="w-full px-3 py-2 border rounded-md text-sm" />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-[#0c1d4a] mb-1">Email *</label>
+              <input required type="email" placeholder="agent@example.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full px-3 py-2 border rounded-md text-sm" />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-[#dc2626] mb-1">Password *</label>
+              <input required={!editing} type="password" placeholder={editing ? "Leave blank to keep current" : "Set a password for the agent"} value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} className="w-full px-3 py-2 border-2 border-[#dc2626]/50 rounded-md text-sm bg-red-50/30" />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-[#0c1d4a] mb-1">Agency Name</label>
+              <input placeholder="Agency Name" value={form.agency_name} onChange={(e) => setForm({ ...form, agency_name: e.target.value })} className="w-full px-3 py-2 border rounded-md text-sm" />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-[#0c1d4a] mb-1">Contact Person</label>
+              <input placeholder="Contact Person" value={form.contact_person} onChange={(e) => setForm({ ...form, contact_person: e.target.value })} className="w-full px-3 py-2 border rounded-md text-sm" />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-[#0c1d4a] mb-1">Phone</label>
+              <input placeholder="Phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="w-full px-3 py-2 border rounded-md text-sm" />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-[#0c1d4a] mb-1">City</label>
+              <input placeholder="City" value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} className="w-full px-3 py-2 border rounded-md text-sm" />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-[#0c1d4a] mb-1">Country</label>
+              <input placeholder="Country" value={form.country} onChange={(e) => setForm({ ...form, country: e.target.value })} className="w-full px-3 py-2 border rounded-md text-sm" />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-[#0c1d4a] mb-1">Balance (PKR)</label>
+              <input type="number" placeholder="0" value={form.balance} onChange={(e) => setForm({ ...form, balance: e.target.value })} className="w-full px-3 py-2 border rounded-md text-sm" />
+            </div>
             <div className="md:col-span-3 flex justify-end gap-2">
               <button type="button" onClick={resetForm} className="px-4 py-2 border rounded-md text-sm hover:bg-gray-50">Cancel</button>
-              <button type="submit" className="px-4 py-2 bg-[#F97316] text-white rounded-md text-sm hover:bg-[#ea580c]">{editing ? "Update" : "Create"}</button>
+              <button type="submit" className="px-4 py-2 bg-[#dc2626] text-white rounded-md text-sm hover:bg-[#b91c1c]">{editing ? "Update" : "Create"}</button>
             </div>
           </form>
         </div>

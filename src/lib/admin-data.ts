@@ -5,6 +5,7 @@ export function getDashboardStats() {
   const packages = db.prepare('SELECT COUNT(*) as count FROM umrah_packages').get() as { count: number };
   const bookings = db.prepare('SELECT COUNT(*) as count FROM bookings').get() as { count: number };
   const payments = db.prepare('SELECT COUNT(*) as count FROM payments').get() as { count: number };
+  const tickets = db.prepare('SELECT COUNT(*) as count FROM tickets').get() as { count: number };
   const totalRevenue = db.prepare('SELECT COALESCE(SUM(total_amount), 0) as total FROM bookings').get() as { total: number };
   const totalPaid = db.prepare('SELECT COALESCE(SUM(amount), 0) as total FROM payments WHERE status = ?').get('approved') as { total: number };
   const contacts = db.prepare('SELECT COUNT(*) as count FROM contacts').get() as { count: number };
@@ -13,6 +14,7 @@ export function getDashboardStats() {
     packages: packages.count,
     bookings: bookings.count,
     payments: payments.count,
+    tickets: tickets.count,
     revenue: totalRevenue.total,
     totalPaid: totalPaid.total,
     contacts: contacts.count,
@@ -36,11 +38,19 @@ export function createAgent(data: any) {
 }
 
 export function updateAgent(id: number, data: any) {
-  const stmt = db.prepare(`
-    UPDATE agents SET code = ?, email = ?, agency_name = ?, contact_person = ?, phone = ?, city = ?, country = ?, balance = ?
-    WHERE id = ?
-  `);
-  stmt.run(data.code, data.email, data.agency_name, data.contact_person, data.phone, data.city, data.country, data.balance, id);
+  if (data.password && data.password.trim() !== "") {
+    const stmt = db.prepare(`
+      UPDATE agents SET code = ?, email = ?, password = ?, agency_name = ?, contact_person = ?, phone = ?, city = ?, country = ?, balance = ?
+      WHERE id = ?
+    `);
+    stmt.run(data.code, data.email, data.password, data.agency_name, data.contact_person, data.phone, data.city, data.country, data.balance, id);
+  } else {
+    const stmt = db.prepare(`
+      UPDATE agents SET code = ?, email = ?, agency_name = ?, contact_person = ?, phone = ?, city = ?, country = ?, balance = ?
+      WHERE id = ?
+    `);
+    stmt.run(data.code, data.email, data.agency_name, data.contact_person, data.phone, data.city, data.country, data.balance, id);
+  }
 }
 
 export function deleteAgent(id: number) {
@@ -301,4 +311,61 @@ export function getAllLedgerAdmin() {
 
 export function deleteLedgerEntry(id: number) {
   return db.prepare('DELETE FROM ledger WHERE id = ?').run(id);
+}
+
+export function getAllTickets() {
+  return db.prepare('SELECT * FROM tickets ORDER BY departure_date DESC').all();
+}
+
+export function createTicket(data: any) {
+  const stmt = db.prepare(`
+    INSERT INTO tickets (airline, flight_no, from_city, to_city, departure_date, departure_time, return_date, return_time, class, ticket_type, price, seats, available_seats, status, notes)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+  return stmt.run(
+    data.airline,
+    data.flight_no,
+    data.from_city,
+    data.to_city,
+    data.departure_date,
+    data.departure_time || null,
+    data.return_date || null,
+    data.return_time || null,
+    data.class || 'economy',
+    data.ticket_type || 'oneway',
+    data.price,
+    data.seats || 0,
+    data.available_seats || data.seats || 0,
+    data.status || 'active',
+    data.notes || ''
+  );
+}
+
+export function updateTicket(id: number, data: any) {
+  const stmt = db.prepare(`
+    UPDATE tickets SET airline = ?, flight_no = ?, from_city = ?, to_city = ?, departure_date = ?, departure_time = ?, return_date = ?, return_time = ?, class = ?, ticket_type = ?, price = ?, seats = ?, available_seats = ?, status = ?, notes = ?
+    WHERE id = ?
+  `);
+  stmt.run(
+    data.airline,
+    data.flight_no,
+    data.from_city,
+    data.to_city,
+    data.departure_date,
+    data.departure_time || null,
+    data.return_date || null,
+    data.return_time || null,
+    data.class || 'economy',
+    data.ticket_type || 'oneway',
+    data.price,
+    data.seats || 0,
+    data.available_seats ?? data.seats ?? 0,
+    data.status || 'active',
+    data.notes || '',
+    id
+  );
+}
+
+export function deleteTicket(id: number) {
+  return db.prepare('DELETE FROM tickets WHERE id = ?').run(id);
 }

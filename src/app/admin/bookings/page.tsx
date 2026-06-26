@@ -56,8 +56,8 @@ export default function AdminBookingsPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-[#0F172A]">All Bookings</h1>
-        <button onClick={fetchBookings} className="flex items-center gap-2 text-gray-500 hover:text-[#F97316] text-sm">
+        <h1 className="text-2xl font-bold text-[#0c1d4a]">All Bookings</h1>
+        <button onClick={fetchBookings} className="flex items-center gap-2 text-gray-500 hover:text-[#dc2626] text-sm">
           <RefreshCw size={16} /> Refresh
         </button>
       </div>

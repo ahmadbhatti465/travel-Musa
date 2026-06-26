@@ -9,12 +9,12 @@ export default function HotelRatesPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
-        <h1 className="text-3xl font-bold text-[#0F172A] mb-4">Hotel Rates</h1>
+        <h1 className="text-3xl font-bold text-[#0c1d4a] mb-4">Hotel Rates</h1>
         <p className="text-gray-600">Check the latest hotel rates in Makkah and Madina for your Umrah packages.</p>
       </div>
 
       <div className="mb-10">
-        <h2 className="text-xl font-bold text-[#0F172A] mb-4 border-b pb-2">Makkah Hotel Rates</h2>
+        <h2 className="text-xl font-bold text-[#0c1d4a] mb-4 border-b pb-2">Makkah Hotel Rates</h2>
         <div className="overflow-x-auto">
           <table className="w-full bg-white rounded-lg shadow-sm border">
             <thead>
@@ -53,7 +53,7 @@ export default function HotelRatesPage() {
       </div>
 
       <div>
-        <h2 className="text-xl font-bold text-[#0F172A] mb-4 border-b pb-2">Madina Hotel Rates</h2>
+        <h2 className="text-xl font-bold text-[#0c1d4a] mb-4 border-b pb-2">Madina Hotel Rates</h2>
         <div className="overflow-x-auto">
           <table className="w-full bg-white rounded-lg shadow-sm border">
             <thead>

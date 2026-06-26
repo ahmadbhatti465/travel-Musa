@@ -11,27 +11,24 @@ export default function PublicNavbar() {
     { href: "/", label: "Home" },
     { href: "/about", label: "About Us" },
     { href: "/umrah-packages", label: "Umrah Packages" },
-    { href: "/one-way-groups", label: "One Way Groups" },
     { href: "/umrah-groups", label: "Umrah Groups" },
     { href: "/hotel-rates", label: "Hotel Rates" },
-    { href: "/umrah-calculator", label: "Umrah Calculator" },
-    { href: "/downloads", label: "Downloads" },
     { href: "/contact", label: "Contact Us" },
   ];
 
   return (
     <header className="w-full">
-      <div className="bg-[#0F172A] text-white text-sm">
+      <div className="bg-[#1e3a8a] text-white text-sm">
         <div className="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1"><Phone size={14} /> +92 333 7323179</span>
             <span className="flex items-center gap-1"><Mail size={14} /> support@musatravelservice.pk</span>
           </div>
           <div className="flex items-center gap-3">
-            <a href="https://facebook.com" target="_blank" rel="noreferrer" className="hover:text-[#F97316]">f</a>
-            <a href="https://twitter.com" target="_blank" rel="noreferrer" className="hover:text-[#F97316]">t</a>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-[#F97316]">i</a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hover:text-[#F97316]">in</a>
+            <a href="https://facebook.com" target="_blank" rel="noreferrer" className="hover:text-[#dc2626]">f</a>
+            <a href="https://twitter.com" target="_blank" rel="noreferrer" className="hover:text-[#dc2626]">t</a>
+            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-[#dc2626]">i</a>
+            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hover:text-[#dc2626]">in</a>
           </div>
         </div>
       </div>
@@ -39,9 +36,7 @@ export default function PublicNavbar() {
       <nav className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
           <Link href="/" className="flex items-center gap-2">
-            <div className="text-2xl font-bold text-[#0F172A]">
-              <span className="text-[#F97316]">Musa</span> Travel
-            </div>
+            <img src="/logo.jpeg" alt="Musa Travel Service" className="h-12 w-auto object-contain" />
           </Link>
 
           <div className="hidden lg:flex items-center gap-6">
@@ -49,20 +44,20 @@ export default function PublicNavbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-gray-700 hover:text-[#F97316] transition-colors"
+                className="text-sm font-medium text-gray-700 hover:text-[#dc2626] transition-colors"
               >
                 {link.label}
               </Link>
             ))}
             <Link
               href="/agent/login"
-              className="flex items-center gap-1 text-sm font-medium text-white bg-[#F97316] hover:bg-[#ea580c] px-4 py-2 rounded-md transition-colors"
+              className="flex items-center gap-1 text-sm font-medium text-white bg-[#dc2626] hover:bg-[#b91c1c] px-4 py-2 rounded-md transition-colors"
             >
               <User size={16} /> Agent Login
             </Link>
             <Link
               href="/admin/login"
-              className="flex items-center gap-1 text-sm font-medium text-[#0F172A] border border-[#0F172A] hover:bg-[#0F172A] hover:text-white px-4 py-2 rounded-md transition-colors"
+              className="flex items-center gap-1 text-sm font-medium text-[#0c1d4a] border border-[#dc2626] hover:bg-[#1e3a8a] hover:text-white px-4 py-2 rounded-md transition-colors"
             >
               Admin
             </Link>
@@ -82,7 +77,7 @@ export default function PublicNavbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="block text-sm font-medium text-gray-700 hover:text-[#F97316]"
+                className="block text-sm font-medium text-gray-700 hover:text-[#dc2626]"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
@@ -90,14 +85,14 @@ export default function PublicNavbar() {
             ))}
             <Link
               href="/agent/login"
-              className="block text-sm font-medium text-white bg-[#F97316] hover:bg-[#ea580c] px-4 py-2 rounded-md text-center"
+              className="block text-sm font-medium text-white bg-[#dc2626] hover:bg-[#b91c1c] px-4 py-2 rounded-md text-center"
               onClick={() => setMobileOpen(false)}
             >
               Agent Login
             </Link>
             <Link
               href="/admin/login"
-              className="block text-sm font-medium text-[#0F172A] border border-[#0F172A] hover:bg-[#0F172A] hover:text-white px-4 py-2 rounded-md text-center"
+              className="block text-sm font-medium text-[#0c1d4a] border border-[#dc2626] hover:bg-[#1e3a8a] hover:text-white px-4 py-2 rounded-md text-center"
               onClick={() => setMobileOpen(false)}
             >
               Admin Login

@@ -8,7 +8,7 @@ import {
   Plane,
   Hotel,
   BookOpen,
-  Wallet,
+  Ticket,
   FileText,
   Download,
   MessageSquare,
@@ -41,7 +41,7 @@ const menuItems: MenuItem[] = [
     ],
   },
   { href: "/admin/bookings", icon: BookOpen, label: "Bookings" },
-  { href: "/admin/payments", icon: Wallet, label: "Payments" },
+  { href: "/admin/tickets", icon: Ticket, label: "Tickets" },
   { href: "/admin/ledger", icon: FileText, label: "Ledger" },
   { href: "/admin/downloads", icon: Download, label: "Downloads" },
   { href: "/admin/contacts", icon: MessageSquare, label: "Contacts" },
@@ -61,10 +61,10 @@ export default function AdminSidebar() {
   };
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 bg-[#1e293b] text-white flex flex-col z-50">
+    <aside className="fixed left-0 top-0 h-screen w-64 bg-[#0c1d4a] text-white flex flex-col z-50">
       <div className="p-4 border-b border-gray-700">
         <Link href="/admin" className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-[#F97316] rounded flex items-center justify-center text-white font-bold">U</div>
+          <img src="/logo.jpeg" alt="Musa Travel Service" className="h-10 w-auto rounded bg-white p-0.5 object-contain" />
           <div>
             <div className="text-sm font-bold">Musa Travel Service</div>
             <div className="text-[10px] text-gray-400">MANAGEMENT PANEL</div>
@@ -83,7 +83,7 @@ export default function AdminSidebar() {
                     onClick={() => toggleMenu(item.label)}
                     className={`w-full flex items-center justify-between px-3 py-2 rounded-md text-sm transition-colors ${
                       item.children.some((c) => pathname.startsWith(c.href))
-                        ? "bg-[#F97316] text-white"
+                        ? "bg-[#dc2626] text-white"
                         : "text-gray-300 hover:bg-gray-700"
                     }`}
                   >
@@ -99,7 +99,7 @@ export default function AdminSidebar() {
                           key={child.href}
                           href={child.href}
                           className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm transition-colors ${
-                            pathname === child.href ? "bg-[#F97316]/20 text-[#F97316]" : "text-gray-300 hover:bg-gray-700"
+                            pathname === child.href ? "bg-[#dc2626]/20 text-[#dc2626]" : "text-gray-300 hover:bg-gray-700"
                           }`}
                         >
                           <child.icon size={14} /> {child.label}
@@ -115,7 +115,7 @@ export default function AdminSidebar() {
                 key={item.href}
                 href={item.href}
                 className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm transition-colors ${
-                  pathname === item.href ? "bg-[#F97316] text-white" : "text-gray-300 hover:bg-gray-700"
+                  pathname === item.href ? "bg-[#dc2626] text-white" : "text-gray-300 hover:bg-gray-700"
                 }`}
               >
                 <item.icon size={16} /> {item.label}

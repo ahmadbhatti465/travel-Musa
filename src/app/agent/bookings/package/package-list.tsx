@@ -486,7 +486,7 @@ export default function PackageBookingClient({
               <div className="bg-gray-50 rounded-md p-3 text-sm">
                 <p className="font-semibold text-[#0c1d4a]">{selectedPkg.title}</p>
                 <p className="text-gray-500 text-xs mt-1">
-                  {selectedPkg.airline} Â· {selectedPkg.days} Days Â·{" "}
+                  {selectedPkg.airline} · {selectedPkg.days} Days ·{" "}
                   {selectedPkg.departure_date}
                 </p>
               </div>
@@ -507,25 +507,25 @@ export default function PackageBookingClient({
                     ).toLocaleString()}
                   </option>
                   <option value="double">
-                    Double &mdash; PKR{“ “}
+                    Double &mdash; PKR{" "}
                     {(
                       selectedPkg.double_price || selectedPkg.price
                     ).toLocaleString()}
                   </option>
                   <option value="triple">
-                    Triple &mdash; PKR{“ “}
+                    Triple &mdash; PKR{" "}
                     {(
                       selectedPkg.triple_price || selectedPkg.price
                     ).toLocaleString()}
                   </option>
                   <option value="quad">
-                    Quad &mdash; PKR{“ “}
+                    Quad &mdash; PKR{" "}
                     {(
                       selectedPkg.quad_price || selectedPkg.price
                     ).toLocaleString()}
                   </option>
                   <option value="quint">
-                    Quint &mdash; PKR{“ “}
+                    Quint &mdash; PKR{" "}
                     {(
                       selectedPkg.quint_price || selectedPkg.price
                     ).toLocaleString()}

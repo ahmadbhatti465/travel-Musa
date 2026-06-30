@@ -379,7 +379,7 @@ export default function AdminLedgerPage() {
                       {agent.agent_name || `Agent #${agent.agent_id}`}
                     </p>
                     <p className="text-xs text-gray-500 mt-0.5">
-                      {agent.agent_email || "-"} Â· {agent.agent_phone || "-"}
+                      {agent.agent_email || "-"} · {agent.agent_phone || "-"}
                     </p>
                   </div>
                   <div className="flex items-center gap-4 shrink-0">

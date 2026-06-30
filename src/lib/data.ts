@@ -100,6 +100,14 @@ export function getDownloads() {
   return db.prepare('SELECT * FROM downloads ORDER BY created_at DESC').all();
 }
 
+export function createContact(data: any) {
+  const stmt = db.prepare(`
+    INSERT INTO contacts (name, email, phone, subject, message)
+    VALUES (?, ?, ?, ?, ?)
+  `);
+  return stmt.run(data.name, data.email, data.phone, data.subject, data.message);
+}
+
 function randomRef() {
   return 'REF-' + Math.random().toString(36).substring(2, 8).toUpperCase();
 }

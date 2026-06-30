@@ -52,7 +52,7 @@ export default async function AgentDashboardPage() {
           <div className="flex items-start justify-between">
             <div>
               <h3 className="font-bold text-lg">Account Closing</h3>
-              <p className="text-sm text-red-100 mt-1">Closing Balance: {balance.toFixed(2)} Br</p>
+              <p className="text-sm text-red-100 mt-1">Closing Balance: {balance.toFixed(2)} PKR</p>
             </div>
             <Wallet size={24} className="text-red-200" />
           </div>

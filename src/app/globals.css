@@ -38,11 +38,11 @@
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
-  --color-upsky-orange: #dc2626;
-  --color-upsky-dark: #1e3a8a;
-  --color-upsky-teal: #0D9488;
-  --color-upsky-yellow: #EAB308;
-  --color-upsky-red: #dc2626;
+  --color-musa-orange: #dc2626;
+  --color-musa-dark: #1e3a8a;
+  --color-musa-teal: #0D9488;
+  --color-musa-yellow: #EAB308;
+  --color-musa-red: #dc2626;
 }
 
 :root {

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getUmrahPackages } from "@/lib/data";
 import {
   Plane,
   Shield,
@@ -17,7 +18,14 @@ import {
   Sparkles,
 } from "lucide-react";
 
-export default function HomePage() {
+const fallbackImages: Record<string, string> = {
+  Saudia: "https://images.unsplash.com/photo-1565058688641-6776481d1b84?w=800&auto=format&fit=crop",
+  PIA: "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800&auto=format&fit=crop",
+  Airblue: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&auto=format&fit=crop",
+  SereneAir: "https://images.unsplash.com/photo-1527612820672-5b56351f7346?w=800&auto=format&fit=crop",
+};
+
+export default async function HomePage() {
   const stats = [
     { value: "25+", label: "Years of Service" },
     { value: "18,000+", label: "Pilgrims Served" },
@@ -25,45 +33,14 @@ export default function HomePage() {
     { value: "120+", label: "Travel Agents" },
   ];
 
-  const packages = [
-    {
-      title: "Economy Umrah by Air",
-      tag: "Most Popular",
-      duration: "10 Days / 9 Nights",
-      price: "PKR 185,000",
-      airline: "Saudia Airlines",
-      image:
-        "https://images.pexels.com/photos/36954374/pexels-photo-36954374.jpeg?auto=compress&cs=tinysrgb&w=800",
-      desc: "Round-trip flights from Lahore, 4-star hotels near Haram, daily breakfast & transfers.",
-    },
-    {
-      title: "Premium Umrah Package",
-      tag: "Best Value",
-      duration: "15 Days / 14 Nights",
-      price: "PKR 295,000",
-      airline: "Pakistan International",
-      image:
-        "https://images.unsplash.com/photo-1565058688641-6776481d1b84?w=800&auto=format&fit=crop&q=80",
-      desc: "Direct flights, 5-star hotels walking distance to Haram, full board meals & guided ziyarat.",
-    },
-    {
-      title: "Ramadan Special Umrah",
-      tag: "Seasonal",
-      duration: "20 Days / 19 Nights",
-      price: "PKR 345,000",
-      airline: "Airblue",
-      image:
-        "https://images.pexels.com/photos/30438876/pexels-photo-30438876.jpeg?auto=compress&cs=tinysrgb&w=800",
-      desc: "Spend the last 10 nights of Ramadan in Makkah. Iftar included, premium hotel near Kaaba.",
-    },
-  ];
+  const packages = getUmrahPackages() as any[];
 
   const destinations = [
     {
       name: "Makkah",
       desc: "The Holy Kaaba & Masjid al-Haram",
       image:
-        "https://images.unsplash.com/photo-1565058688641-6776481d1b84?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=800&auto=format&fit=crop",
     },
     {
       name: "Madinah",
@@ -128,7 +105,7 @@ export default function HomePage() {
     {
       name: "Muhammad Asif Khan",
       role: "Travel Agent, Lahore",
-      text: "Upsky has been our trusted partner for 6 years. Their rates beat every other operator and the support is exceptional.",
+      text: "Musa Travel Service has been our trusted partner for 6 years. Their rates beat every other operator and the support is exceptional.",
       rating: 5,
       avatar: "https://randomuser.me/api/portraits/men/32.jpg",
     },
@@ -253,53 +230,65 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {packages.map((pkg) => (
-              <Link
-                key={pkg.title}
-                href="/umrah-packages"
-                className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
-              >
-                <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={pkg.image}
-                    alt={pkg.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#dc2626] text-white text-xs font-bold uppercase tracking-wider shadow-lg">
-                    {pkg.tag}
-                  </span>
-                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white">
-                    <span className="text-sm font-medium flex items-center gap-1.5">
-                      <Clock size={14} /> {pkg.duration}
-                    </span>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-2 text-xs text-gray-500 mb-2">
-                    <Plane size={14} className="text-[#dc2626]" />
-                    {pkg.airline}
-                  </div>
-                  <h3 className="text-xl font-bold text-[#0c1d4a] mb-2 group-hover:text-[#dc2626] transition-colors">
-                    {pkg.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-4 leading-relaxed">
-                    {pkg.desc}
-                  </p>
-                  <div className="flex items-end justify-between pt-4 border-t border-gray-100">
-                    <div>
-                      <p className="text-xs text-gray-500 uppercase tracking-wider">Starting from</p>
-                      <p className="text-2xl font-bold text-[#0c1d4a]">{pkg.price}</p>
+          {packages.length === 0 ? (
+            <div className="text-center py-12 text-gray-500">
+              No packages available at the moment. Please check back soon.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {packages.slice(0, 6).map((pkg) => {
+                const img = pkg.image_url || fallbackImages[pkg.airline] || fallbackImages["Saudia"];
+                const desc = pkg.hotel_makkah && pkg.hotel_madina
+                  ? `Round-trip flights, stays at ${pkg.hotel_makkah} in Makkah and ${pkg.hotel_madina} in Madinah.`
+                  : "Premium Umrah package with flights, hotels, visa and transfers.";
+                return (
+                  <Link
+                    key={pkg.id}
+                    href="/umrah-packages"
+                    className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+                  >
+                    <div className="relative h-56 overflow-hidden">
+                      <img
+                        src={img}
+                        alt={pkg.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#dc2626] text-white text-xs font-bold uppercase tracking-wider shadow-lg">
+                        {pkg.airline}
+                      </span>
+                      <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white">
+                        <span className="text-sm font-medium flex items-center gap-1.5">
+                          <Clock size={14} /> {pkg.days} Days / {pkg.days - 1} Nights
+                        </span>
+                      </div>
                     </div>
-                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#dc2626] group-hover:gap-2 transition-all">
-                      Book Now <ArrowRight size={16} />
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+                    <div className="p-6">
+                      <div className="flex items-center gap-2 text-xs text-gray-500 mb-2">
+                        <Plane size={14} className="text-[#dc2626]" />
+                        {pkg.airline}
+                      </div>
+                      <h3 className="text-xl font-bold text-[#0c1d4a] mb-2 group-hover:text-[#dc2626] transition-colors">
+                        {pkg.title}
+                      </h3>
+                      <p className="text-sm text-gray-600 mb-4 leading-relaxed">
+                        {desc}
+                      </p>
+                      <div className="flex items-end justify-between pt-4 border-t border-gray-100">
+                        <div>
+                          <p className="text-xs text-gray-500 uppercase tracking-wider">Starting from</p>
+                          <p className="text-2xl font-bold text-[#0c1d4a]">PKR {pkg.price?.toLocaleString()}</p>
+                        </div>
+                        <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#dc2626] group-hover:gap-2 transition-all">
+                          Book Now <ArrowRight size={16} />
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
 
           <div className="text-center mt-10">
             <Link
@@ -363,7 +352,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-14 max-w-2xl mx-auto">
             <span className="text-[#dc2626] font-semibold text-sm uppercase tracking-wider">
-              Why Choose Upsky
+              Why Choose Musa Travel Service
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-[#0c1d4a] mt-2 mb-4">
               Your Journey, Our Commitment
@@ -489,7 +478,7 @@ export default function HomePage() {
               Get In Touch
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-[#0c1d4a] mt-2 mb-6">
-              Contact Upsky Travel Service
+              Contact Musa Travel Service
             </h2>
             <p className="text-gray-600 mb-8 leading-relaxed">
               Have questions about our packages or need a custom quote? Reach out
@@ -504,7 +493,7 @@ export default function HomePage() {
                 <div>
                   <h4 className="font-bold text-[#0c1d4a] mb-1">Head Office</h4>
                   <p className="text-sm text-gray-600">
-                    Suite 203-204, Kohinoor City, Faisalabad, Punjab, Pakistan
+                    Gulberg 3, Main Bouleward, Eden Tower LGF 6/8 Lahore
                   </p>
                 </div>
               </div>
@@ -516,7 +505,7 @@ export default function HomePage() {
                 <div>
                   <h4 className="font-bold text-[#0c1d4a] mb-1">Call / WhatsApp</h4>
                   <p className="text-sm text-gray-600">
-                    +92 333 7323179 &nbsp;&bull;&nbsp; +92 3000 811529 (24/7 support)
+                    03390000007 (24/7 support)
                   </p>
                 </div>
               </div>
@@ -527,7 +516,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <h4 className="font-bold text-[#0c1d4a] mb-1">Email</h4>
-                  <p className="text-sm text-gray-600">support@musatravelservice.pk</p>
+                  <p className="text-sm text-gray-600">musatravelagnecy1@gmail.com</p>
                 </div>
               </div>
             </div>
@@ -542,7 +531,7 @@ export default function HomePage() {
 
           <div className="rounded-2xl overflow-hidden shadow-lg h-[450px] border border-gray-100">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.8322996481626!2d73.0793!3d31.4187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDI1JzA3LjMiTiA3M8KwMDQnNDUuNSJF!5e0!3m2!1sen!2s!4v1600000000000!5m2!1sen!2s"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3401.0!2d74.3483!3d31.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDMxJzEzLjQiTiA3NMKwMjAnNTQuMCJF!5e0!3m2!1sen!2s!4v1600000000000!5m2!1sen!2s"
               width="100%"
               height="100%"
               style={{ border: 0 }}

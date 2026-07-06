@@ -62,7 +62,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="font-bold">Head Office</h3>
-                <p className="text-sm text-gray-600 mt-1">Suite 203-204, Kohinoor City, Faisalabad, Punjab, Pakistan</p>
+                <p className="text-sm text-gray-600 mt-1">Gulberg 3, Main Bouleward, Eden Tower LGF 6/8 Lahore</p>
               </div>
             </div>
           </div>
@@ -74,7 +74,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="font-bold">Phone</h3>
-                <p className="text-sm text-gray-600 mt-1">+92 333 7323179<br />+92 3000 811529</p>
+                <p className="text-sm text-gray-600 mt-1">03390000007</p>
               </div>
             </div>
           </div>
@@ -86,7 +86,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="font-bold">Email</h3>
-                <p className="text-sm text-gray-600 mt-1">support@musatravelservice.pk</p>
+                <p className="text-sm text-gray-600 mt-1">musatravelagnecy1@gmail.com</p>
               </div>
             </div>
           </div>

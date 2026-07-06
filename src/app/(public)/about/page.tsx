@@ -4,7 +4,7 @@ export default function AboutPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
-        <h1 className="text-3xl font-bold text-[#0c1d4a] mb-4">About Upsky Group of Travels</h1>
+        <h1 className="text-3xl font-bold text-[#0c1d4a] mb-4">About Musa Travel Service</h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
           We are a leading travel agency specializing in Hajj & Umrah services, providing premium travel experiences to pilgrims from Pakistan.
         </p>

@@ -62,7 +62,7 @@ const roomLabels: Record<string, string> = {
 };
 
 const fallbackImages: Record<string, string> = {
-  Saudia: "https://images.unsplash.com/photo-1542317805-56f3415e0e94?w=800&auto=format&fit=crop",
+  Saudia: "https://images.unsplash.com/photo-1565058688641-6776481d1b84?w=800&auto=format&fit=crop",
   PIA: "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800&auto=format&fit=crop",
   Airblue: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&auto=format&fit=crop",
   SereneAir: "https://images.unsplash.com/photo-1527612820672-5b56351f7346?w=800&auto=format&fit=crop",

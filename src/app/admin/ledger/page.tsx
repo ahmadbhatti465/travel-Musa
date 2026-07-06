@@ -316,7 +316,7 @@ export default function AdminLedgerPage() {
       doc.setFontSize(8);
       doc.setTextColor(150, 150, 150);
       doc.text(
-        `Musa Travel Service | musatravelservice.com | Page ${i} of ${pageCount}`,
+        `Musa Travel Service | https://travelwithmusa.com/ | Page ${i} of ${pageCount}`,
         pageW / 2,
         doc.internal.pageSize.getHeight() - 20,
         { align: "center" }

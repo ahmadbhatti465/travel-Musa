@@ -41,7 +41,7 @@ export default function AgentLoginPage() {
       <div className="hidden lg:flex flex-1 bg-[#1e3a8a] items-center justify-center relative">
         <div
           className="absolute inset-0 opacity-30 bg-cover bg-center"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542317805-56f3415e0e94?w=1600&auto=format&fit=crop')" }}
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1565058688641-6776481d1b84?w=1600&auto=format&fit=crop')" }}
         />
         <div className="relative z-10 text-center text-white px-12">
           <h1 className="text-4xl font-bold mb-4">Musa Travel Service</h1>

@@ -58,7 +58,12 @@ export function deleteAgent(id: number) {
 }
 
 export function getAllUmrahPackages() {
-  return db.prepare('SELECT * FROM umrah_packages ORDER BY departure_date DESC').all();
+  return db.prepare(`
+    SELECT p.*, a.agency_name as agent_name
+    FROM umrah_packages p
+    LEFT JOIN agents a ON p.agent_id = a.id
+    ORDER BY p.departure_date DESC
+  `).all();
 }
 
 export function createUmrahPackage(data: any) {
@@ -179,9 +184,9 @@ export function deleteHotelRate(id: number) {
 
 export function getAllBookings() {
   return db.prepare(`
-    SELECT b.*, a.agency_name as agent_name
+    SELECT b.*, COALESCE(a.agency_name, 'Direct Client') as agent_name
     FROM bookings b
-    JOIN agents a ON b.agent_id = a.id
+    LEFT JOIN agents a ON b.agent_id = a.id
     ORDER BY b.created_at DESC
   `).all();
 }
@@ -191,7 +196,7 @@ export function getAllBookingsWithDetails() {
     SELECT
       b.id,
       b.agent_id,
-      a.agency_name as agent_name,
+      COALESCE(a.agency_name, 'Direct Client') as agent_name,
       a.email as agent_email,
       a.phone as agent_phone,
       b.type,
@@ -202,6 +207,9 @@ export function getAllBookingsWithDetails() {
       b.status,
       b.room_type,
       b.notes,
+      b.client_name,
+      b.client_phone,
+      b.client_email,
       b.created_at,
       p.id as package_id,
       p.title as package_title,
@@ -235,7 +243,7 @@ export function getAllBookingsWithDetails() {
       ug.price as umrah_group_price,
       ug.days as umrah_group_days
     FROM bookings b
-    JOIN agents a ON b.agent_id = a.id
+    LEFT JOIN agents a ON b.agent_id = a.id
     LEFT JOIN umrah_packages p ON b.package_id = p.id
     LEFT JOIN one_way_groups owg ON b.group_id = owg.id AND b.type = 'group'
     LEFT JOIN umrah_groups ug ON b.group_id = ug.id AND b.type = 'umrah'

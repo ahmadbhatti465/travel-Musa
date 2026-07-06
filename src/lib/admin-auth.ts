@@ -1,7 +1,7 @@
 import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 
-const adminSecret = new TextEncoder().encode(process.env.ADMIN_JWT_SECRET || 'upsky-admin-secret-key-2026');
+const adminSecret = new TextEncoder().encode(process.env.ADMIN_JWT_SECRET || 'musa-admin-secret-key-2026');
 
 export async function signAdminToken(payload: object) {
   return new SignJWT(payload as any)

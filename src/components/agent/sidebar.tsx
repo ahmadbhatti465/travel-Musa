@@ -4,10 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
-  BookOpen,
   Package,
-  Ticket,
-  Users,
   Landmark,
   Receipt,
   Wallet,
@@ -24,21 +21,7 @@ type MenuItem = ChildItem | ParentItem;
 
 const menuItems: MenuItem[] = [
   { href: "/agent", icon: LayoutDashboard, label: "Dashboard" },
-  {
-    label: "Active Booking",
-    icon: BookOpen,
-    children: [
-      { href: "/agent/bookings/package", icon: Package, label: "Package Booking" },
-      { href: "/agent/tickets", icon: Ticket, label: "Airline Tickets" },
-    ],
-  },
-  {
-    label: "Umrah",
-    icon: Users,
-    children: [
-      { href: "/agent/bookings/umrah", icon: Users, label: "Umrah Bookings" },
-    ],
-  },
+  { href: "/agent/packages", icon: Package, label: "My Packages" },
   { href: "/agent/bank-details", icon: Landmark, label: "Bank Details" },
   { href: "/agent/accounts", icon: Receipt, label: "Accounts" },
   { href: "/agent/payments", icon: Wallet, label: "Add Payments" },

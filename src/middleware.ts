@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
 
-const agentSecret = new TextEncoder().encode(process.env.JWT_SECRET || "upsky-secret-key-2026");
-const adminSecret = new TextEncoder().encode(process.env.ADMIN_JWT_SECRET || "upsky-admin-secret-key-2026");
+const agentSecret = new TextEncoder().encode(process.env.JWT_SECRET || "musa-secret-key-2026");
+const adminSecret = new TextEncoder().encode(process.env.ADMIN_JWT_SECRET || "musa-admin-secret-key-2026");
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { getAgent } from "@/lib/auth";
-import { getAgentById, getBookingsByAgent, getLedger, getPayments } from "@/lib/data";
+import { getAgentById, getLedger, getPayments, getUmrahPackages } from "@/lib/data";
 import { redirect } from "next/navigation";
-import { ArrowRight, Users, Calculator, Wallet } from "lucide-react";
+import { ArrowRight, Calculator, Wallet, Package } from "lucide-react";
 
 export default async function AgentDashboardPage() {
   const agentToken = await getAgent();
@@ -11,9 +11,9 @@ export default async function AgentDashboardPage() {
   const agent = getAgentById(Number(agentToken.id)) as any;
   if (!agent) redirect("/agent/login");
 
-  const bookings = getBookingsByAgent(agent.id) as any[];
   const ledger = getLedger(agent.id) as any[];
   const payments = getPayments(agent.id) as any[];
+  const agentPackages = getUmrahPackages({ agent_id: agent.id }) as any[];
 
   const balance = agent.balance || 0;
 
@@ -22,16 +22,16 @@ export default async function AgentDashboardPage() {
       <h1 className="text-2xl font-bold text-[#0c1d4a]">Dashboard</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Link href="/agent/bookings/umrah" className="bg-[#dc2626] text-white rounded-lg p-5 hover:shadow-md transition-shadow">
+        <Link href="/agent/packages" className="bg-[#dc2626] text-white rounded-lg p-5 hover:shadow-md transition-shadow">
           <div className="flex items-start justify-between">
             <div>
-              <h3 className="font-bold text-lg">Umrah Groups</h3>
-              <p className="text-sm text-orange-100 mt-1">My Umrah Group Bookings</p>
+              <h3 className="font-bold text-lg">My Packages</h3>
+              <p className="text-sm text-orange-100 mt-1">{agentPackages.length} active packages</p>
             </div>
-            <Users size={24} className="text-orange-200" />
+            <Package size={24} className="text-orange-200" />
           </div>
           <div className="mt-4 flex items-center text-sm font-medium">
-            Go to list <ArrowRight size={16} className="ml-1" />
+            Manage <ArrowRight size={16} className="ml-1" />
           </div>
         </Link>
 
@@ -39,12 +39,12 @@ export default async function AgentDashboardPage() {
           <div className="flex items-start justify-between">
             <div>
               <h3 className="font-bold text-lg">Umrah Calculator</h3>
-              <p className="text-sm text-yellow-100 mt-1">My Umrah Calculator Bookings</p>
+              <p className="text-sm text-yellow-100 mt-1">Build custom quotes</p>
             </div>
             <Calculator size={24} className="text-yellow-200" />
           </div>
           <div className="mt-4 flex items-center text-sm font-medium">
-            Go to list <ArrowRight size={16} className="ml-1" />
+            Open <ArrowRight size={16} className="ml-1" />
           </div>
         </Link>
 
@@ -134,51 +134,6 @@ export default async function AgentDashboardPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm border">
-        <div className="px-6 py-4 border-b">
-          <h2 className="text-lg font-bold">Recent Bookings</h2>
-        </div>
-        <div className="p-6">
-          {bookings.length === 0 ? (
-            <p className="text-gray-500">No bookings yet.</p>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b">
-                    <th className="text-left py-2 px-3">Ref#</th>
-                    <th className="text-left py-2 px-3">Type</th>
-                    <th className="text-left py-2 px-3">Adults</th>
-                    <th className="text-left py-2 px-3">Infants</th>
-                    <th className="text-left py-2 px-3">Amount</th>
-                    <th className="text-left py-2 px-3">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {bookings.slice(0, 5).map((b) => (
-                    <tr key={b.id} className="border-b hover:bg-gray-50">
-                      <td className="py-2 px-3">{b.reference_id}</td>
-                      <td className="py-2 px-3 capitalize">{b.type}</td>
-                      <td className="py-2 px-3">{b.adults}</td>
-                      <td className="py-2 px-3">{b.infants}</td>
-                      <td className="py-2 px-3">{b.total_amount?.toLocaleString()}</td>
-                      <td className="py-2 px-3">
-                        <span className={`px-2 py-1 rounded text-xs font-medium ${
-                          b.status === "confirmed" ? "bg-green-100 text-green-700" :
-                          b.status === "pending" ? "bg-yellow-100 text-yellow-700" :
-                          "bg-gray-100 text-gray-700"
-                        }`}>
-                          {b.status}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
-      </div>
     </div>
   );
 }

@@ -21,8 +21,8 @@ export default function PublicNavbar() {
       <div className="bg-[#1e3a8a] text-white text-sm">
         <div className="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1"><Phone size={14} /> +92 333 7323179</span>
-            <span className="flex items-center gap-1"><Mail size={14} /> support@musatravelservice.pk</span>
+            <span className="flex items-center gap-1"><Phone size={14} /> 03390000007</span>
+            <span className="flex items-center gap-1"><Mail size={14} /> musatravelagnecy1@gmail.com</span>
           </div>
           <div className="flex items-center gap-3">
             <a href="https://facebook.com" target="_blank" rel="noreferrer" className="hover:text-[#dc2626]">f</a>

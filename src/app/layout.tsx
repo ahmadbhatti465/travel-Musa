@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Upsky Group of Travels - Hajj & Umrah Services",
-  description: "Fly Beyond Skies With Upsky - Premium Hajj and Umrah travel services",
+  title: "Musa Travel Service - Hajj & Umrah Services",
+  description: "Fly Beyond Skies With Musa Travel Service - Premium Hajj and Umrah travel services",
 };
 
 export default function RootLayout({

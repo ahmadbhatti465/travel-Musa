@@ -20,12 +20,13 @@ export function updateAgentProfile(id: number, data: any) {
   stmt.run(data.agency_name, data.contact_person, data.phone, data.city, data.country, id);
 }
 
-export function getUmrahPackages(filters?: { airline?: string; from?: string; to?: string }) {
+export function getUmrahPackages(filters?: { airline?: string; from?: string; to?: string; agent_id?: number }) {
   let sql = "SELECT * FROM umrah_packages WHERE status = 'active'";
   const params: any[] = [];
   if (filters?.airline) { sql += ' AND airline = ?'; params.push(filters.airline); }
   if (filters?.from) { sql += ' AND departure_date >= ?'; params.push(filters.from); }
   if (filters?.to) { sql += ' AND departure_date <= ?'; params.push(filters.to); }
+  if (filters?.agent_id !== undefined) { sql += ' AND agent_id = ?'; params.push(filters.agent_id); }
   sql += ' ORDER BY departure_date';
   return db.prepare(sql).all(...params);
 }
@@ -66,6 +67,30 @@ export function createBooking(data: any) {
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
   return stmt.run(data.agent_id, data.type, data.reference_id || randomRef(), data.package_id, data.group_id, data.adults, data.infants, data.total_amount, data.status || 'pending', data.notes);
+}
+
+export function createClientBooking(data: any) {
+  const stmt = db.prepare(`
+    INSERT INTO bookings (agent_id, type, reference_id, package_id, group_id, ticket_id, adults, infants, total_amount, status, room_type, client_name, client_phone, client_email, notes)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+  return stmt.run(
+    data.agent_id || null,
+    data.type,
+    data.reference_id || randomRef(),
+    data.package_id || null,
+    data.group_id || null,
+    data.ticket_id || null,
+    data.adults,
+    data.infants,
+    data.total_amount,
+    data.status || 'pending',
+    data.room_type || null,
+    data.client_name,
+    data.client_phone,
+    data.client_email,
+    data.notes || null
+  );
 }
 
 export function getBankDetails(agentId: number) {

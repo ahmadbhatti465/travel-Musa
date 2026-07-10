@@ -21,7 +21,7 @@ export default function PublicNavbar() {
       <div className="bg-[#1e3a8a] text-white text-sm">
         <div className="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1"><Phone size={14} /> 03390000007</span>
+            <span className="flex items-center gap-1"><Phone size={14} /> 0333 4390349 / 03390000007</span>
             <span className="flex items-center gap-1"><Mail size={14} /> musatravelagnecy1@gmail.com</span>
           </div>
           <div className="flex items-center gap-3">

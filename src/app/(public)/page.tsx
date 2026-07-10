@@ -40,19 +40,19 @@ export default async function HomePage() {
       name: "Makkah",
       desc: "The Holy Kaaba & Masjid al-Haram",
       image:
-        "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1627728734379-a5f8c099763e?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       name: "Madinah",
       desc: "Masjid an-Nabawi & Roza Rasool (SAW)",
       image:
-        "https://images.pexels.com/photos/35093952/pexels-photo-35093952.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "https://images.unsplash.com/photo-1692977579997-948328cdb7d2?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       name: "Jeddah",
       desc: "Gateway city & Corniche",
       image:
-        "https://images.pexels.com/photos/18996539/pexels-photo-18996539.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqQENiTmMeNxF63HhW0abaxA6xbpQM3WbyJ2_rkp2FvofhUYANcFgxmLw&s=10",
     },
   ];
 
@@ -66,10 +66,10 @@ export default async function HomePage() {
     },
     {
       icon: Shield,
-      title: "Best Price Guarantee",
+      title: "Guarantee",
       desc: "Transparent pricing with no hidden charges. IATA-approved travel provider.",
       image:
-        "https://images.unsplash.com/photo-1565514020179-026b92b84bb6?w=800&auto=format&fit=crop&q=80",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKWB0TrlYNWUW1DG4w8WBVnj70ZQPtOxt2fyyPkmp6Evnnj84IH68tV7wt&s=10",
     },
     {
       icon: Building2,
@@ -90,7 +90,7 @@ export default async function HomePage() {
       title: "Guided Ziyarat",
       desc: "Comprehensive religious tours of historical sites in Makkah & Madinah.",
       image:
-        "https://images.pexels.com/photos/34956782/pexels-photo-34956782.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTksS8nCrP2cXInz3njHPmmtKXES9Xg8i-MVKmiimgB9d3JXvINz_HXoA&s=10",
     },
     {
       icon: Award,
@@ -430,16 +430,9 @@ export default async function HomePage() {
                 <p className="text-gray-200 leading-relaxed mb-6 italic">
                   "{t.text}"
                 </p>
-                <div className="flex items-center gap-3 pt-4 border-t border-white/10">
-                  <img
-                    src={t.avatar}
-                    alt={t.name}
-                    className="w-11 h-11 rounded-full object-cover ring-2 ring-[#dc2626]"
-                  />
-                  <div>
-                    <p className="font-semibold">{t.name}</p>
-                    <p className="text-xs text-gray-400">{t.role}</p>
-                  </div>
+                <div className="pt-4 border-t border-white/10">
+                  <p className="font-semibold">{t.name}</p>
+                  <p className="text-xs text-gray-400">{t.role}</p>
                 </div>
               </div>
             ))}
@@ -448,7 +441,7 @@ export default async function HomePage() {
       </section>
 
       {/* CTA Banner */}
-      <section className="py-16 bg-gradient-to-r from-[#dc2626] to-[#b91c1c] text-white">
+      {/* <section className="py-16 bg-gradient-to-r from-[#dc2626] to-[#b91c1c] text-white">
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <Heart className="shrink-0" size={40} />
@@ -468,7 +461,7 @@ export default async function HomePage() {
             Register Now <ArrowRight size={18} />
           </Link>
         </div>
-      </section>
+      </section> */}
 
       {/* Contact Section */}
       <section className="py-20 bg-white">
@@ -505,7 +498,7 @@ export default async function HomePage() {
                 <div>
                   <h4 className="font-bold text-[#0c1d4a] mb-1">Call / WhatsApp</h4>
                   <p className="text-sm text-gray-600">
-                    03390000007 (24/7 support)
+                    0333 4390349 / 03390000007 (24/7 support)
                   </p>
                 </div>
               </div>

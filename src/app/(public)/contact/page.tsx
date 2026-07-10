@@ -74,7 +74,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="font-bold">Phone</h3>
-                <p className="text-sm text-gray-600 mt-1">03390000007</p>
+                <p className="text-sm text-gray-600 mt-1">0333 4390349 / 03390000007</p>
               </div>
             </div>
           </div>

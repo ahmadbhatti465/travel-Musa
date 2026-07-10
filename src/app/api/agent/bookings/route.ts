@@ -43,7 +43,12 @@ export async function POST(request: Request) {
       }
       totalAmount = (ticket?.price || 0) * adults;
     } else if (group_id) {
-      const group = db.prepare("SELECT price FROM one_way_groups WHERE id = ?").get(group_id) as any;
+      let group;
+      if (type === "umrah") {
+        group = db.prepare("SELECT price FROM umrah_groups WHERE id = ?").get(group_id) as any;
+      } else {
+        group = db.prepare("SELECT price FROM one_way_groups WHERE id = ?").get(group_id) as any;
+      }
       totalAmount = (group?.price || 0) * adults;
     } else if (package_id) {
       const pkg = db.prepare("SELECT price, sharing_price, double_price, triple_price, quad_price, quint_price FROM umrah_packages WHERE id = ?").get(package_id) as any;

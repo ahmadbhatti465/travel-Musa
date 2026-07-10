@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getAgent } from "@/lib/auth";
 import { getAgentById, getLedger, getPayments, getUmrahPackages } from "@/lib/data";
 import { redirect } from "next/navigation";
-import { ArrowRight, Calculator, Wallet, Package } from "lucide-react";
+import { ArrowRight, Calculator, Wallet, Package, Plane, Calendar } from "lucide-react";
 
 export default async function AgentDashboardPage() {
   const agentToken = await getAgent();
@@ -45,6 +45,32 @@ export default async function AgentDashboardPage() {
           </div>
           <div className="mt-4 flex items-center text-sm font-medium">
             Open <ArrowRight size={16} className="ml-1" />
+          </div>
+        </Link>
+
+        <Link href="/agent/tickets" className="bg-[#1e3a8a] text-white rounded-lg p-5 hover:shadow-md transition-shadow">
+          <div className="flex items-start justify-between">
+            <div>
+              <h3 className="font-bold text-lg">Airline Tickets</h3>
+              <p className="text-sm text-blue-100 mt-1">Browse & book admin tickets</p>
+            </div>
+            <Plane size={24} className="text-blue-200" />
+          </div>
+          <div className="mt-4 flex items-center text-sm font-medium">
+            Book Now <ArrowRight size={16} className="ml-1" />
+          </div>
+        </Link>
+
+        <Link href="/agent/bookings/package" className="bg-[#0D9488] text-white rounded-lg p-5 hover:shadow-md transition-shadow">
+          <div className="flex items-start justify-between">
+            <div>
+              <h3 className="font-bold text-lg">Book Packages</h3>
+              <p className="text-sm text-teal-100 mt-1">Umrah packages from admin</p>
+            </div>
+            <Calendar size={24} className="text-teal-200" />
+          </div>
+          <div className="mt-4 flex items-center text-sm font-medium">
+            Browse <ArrowRight size={16} className="ml-1" />
           </div>
         </Link>
 

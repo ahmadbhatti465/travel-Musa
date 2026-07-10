@@ -7,8 +7,8 @@ export default async function PackageBookingPage() {
   const agentToken = await getAgent();
   if (!agentToken) redirect("/agent/login");
 
-  const bookings = getBookingsByAgent(Number(agentToken.id), "package") as any[];
-  const packages = getUmrahPackages() as any[];
+  const bookings = await getBookingsByAgent(Number(agentToken.id), "package") as any[];
+  const packages = await getUmrahPackages() as any[];
 
   return (
     <PackageBookingClient packages={packages} bookings={bookings} />

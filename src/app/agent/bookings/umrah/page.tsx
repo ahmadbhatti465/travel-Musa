@@ -7,8 +7,8 @@ export default async function UmrahBookingsPage() {
   const agentToken = await getAgent();
   if (!agentToken) redirect("/agent/login");
 
-  const bookings = getBookingsByAgent(Number(agentToken.id), "umrah") as any[];
-  const groups = getUmrahGroups() as any[];
+  const bookings = await getBookingsByAgent(Number(agentToken.id), "umrah") as any[];
+  const groups = await getUmrahGroups() as any[];
 
   return (
     <UmrahGroupBookingClient groups={groups} bookings={bookings} />

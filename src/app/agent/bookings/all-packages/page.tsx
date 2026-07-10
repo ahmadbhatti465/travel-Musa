@@ -6,10 +6,10 @@ export default async function AllPackageBookingsPage() {
   const agentToken = await getAgent();
   if (!agentToken) redirect("/agent/login");
 
-  const bookings = getBookingsByAgent(Number(agentToken.id)) as any[];
-  const packages = getUmrahPackages() as any[];
-  const umrahGroups = getUmrahGroups() as any[];
-  const oneWayGroups = getOneWayGroups() as any[];
+  const bookings = await getBookingsByAgent(Number(agentToken.id)) as any[];
+  const packages = await getUmrahPackages() as any[];
+  const umrahGroups = await getUmrahGroups() as any[];
+  const oneWayGroups = await getOneWayGroups() as any[];
 
   return (
     <div className="space-y-6">

@@ -33,7 +33,7 @@ export default async function HomePage() {
     { value: "120+", label: "Travel Agents" },
   ];
 
-  const packages = getUmrahPackages() as any[];
+  const packages = await getUmrahPackages() as any[];
 
   const destinations = [
     {

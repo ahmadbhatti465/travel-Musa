@@ -7,8 +7,8 @@ export default async function GroupBookingsPage() {
   const agentToken = await getAgent();
   if (!agentToken) redirect("/agent/login");
 
-  const bookings = getBookingsByAgent(Number(agentToken.id), "group") as any[];
-  const groups = getOneWayGroups() as any[];
+  const bookings = await getBookingsByAgent(Number(agentToken.id), "group") as any[];
+  const groups = await getOneWayGroups() as any[];
 
   return (
     <GroupBookingClient groups={groups} bookings={bookings} />

@@ -6,7 +6,7 @@ export default async function BankDetailsPage() {
   const agentToken = await getAgent();
   if (!agentToken) redirect("/agent/login");
 
-  const banks = getBankDetails(Number(agentToken.id)) as any[];
+  const banks = await getBankDetails(Number(agentToken.id)) as any[];
 
   return (
     <div className="space-y-6">

@@ -6,10 +6,10 @@ export default async function AccountsPage() {
   const agentToken = await getAgent();
   if (!agentToken) redirect("/agent/login");
 
-  const agent = getAgentById(Number(agentToken.id)) as any;
-  const bookings = getBookingsByAgent(Number(agentToken.id)) as any[];
-  const payments = getPayments(Number(agentToken.id)) as any[];
-  const ledger = getLedger(Number(agentToken.id)) as any[];
+  const agent = await getAgentById(Number(agentToken.id)) as any;
+  const bookings = await getBookingsByAgent(Number(agentToken.id)) as any[];
+  const payments = await getPayments(Number(agentToken.id)) as any[];
+  const ledger = await getLedger(Number(agentToken.id)) as any[];
 
   const totalBookings = bookings.reduce((sum, b) => sum + (b.total_amount || 0), 0);
   const totalPaid = payments.filter((p) => p.status === "approved").reduce((sum, p) => sum + p.amount, 0);

@@ -6,7 +6,7 @@ export default async function ProfilePage() {
   const agentToken = await getAgent();
   if (!agentToken) redirect("/agent/login");
 
-  const agent = getAgentById(Number(agentToken.id)) as any;
+  const agent = await getAgentById(Number(agentToken.id)) as any;
 
   return (
     <div className="space-y-6">

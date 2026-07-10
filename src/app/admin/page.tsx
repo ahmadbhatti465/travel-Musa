@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminDashboard() {
   await requireAdmin();
-  const stats = getDashboardStats();
+  const stats = await getDashboardStats();
 
   const cards = [
     { label: "Total Agents", value: stats.agents, icon: Users, color: "bg-blue-500", link: "/admin/agents" },

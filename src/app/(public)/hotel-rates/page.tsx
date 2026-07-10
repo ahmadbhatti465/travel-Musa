@@ -2,7 +2,7 @@ import { getHotelRates } from "@/lib/data";
 import HotelRateList from "./hotel-rate-list";
 
 export default async function HotelRatesPage() {
-  const rates = getHotelRates() as any[];
+  const rates = await getHotelRates() as any[];
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">

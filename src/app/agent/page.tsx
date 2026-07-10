@@ -8,12 +8,12 @@ export default async function AgentDashboardPage() {
   const agentToken = await getAgent();
   if (!agentToken) redirect("/agent/login");
 
-  const agent = getAgentById(Number(agentToken.id)) as any;
+  const agent = await getAgentById(Number(agentToken.id)) as any;
   if (!agent) redirect("/agent/login");
 
-  const ledger = getLedger(agent.id) as any[];
-  const payments = getPayments(agent.id) as any[];
-  const agentPackages = getUmrahPackages({ agent_id: agent.id }) as any[];
+  const ledger = await getLedger(agent.id) as any[];
+  const payments = await getPayments(agent.id) as any[];
+  const agentPackages = await getUmrahPackages({ agent_id: agent.id }) as any[];
 
   const balance = agent.balance || 0;
 

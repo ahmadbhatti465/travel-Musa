@@ -6,7 +6,7 @@ export default async function PaymentsPage() {
   const agentToken = await getAgent();
   if (!agentToken) redirect("/agent/login");
 
-  const payments = getPayments(Number(agentToken.id)) as any[];
+  const payments = await getPayments(Number(agentToken.id)) as any[];
 
   return (
     <div className="space-y-6">

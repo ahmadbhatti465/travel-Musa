@@ -7,7 +7,7 @@ export async function POST(request: Request) {
   try {
     const { username, password } = await request.json();
 
-    const admin = db.prepare("SELECT * FROM admins WHERE username = ? AND password = ?").get(username, password) as any;
+    const admin = await db.prepare("SELECT * FROM admins WHERE username = ? AND password = ?").get(username, password) as any;
 
     if (!admin) {
       return NextResponse.json({ error: "Invalid username or password" }, { status: 401 });

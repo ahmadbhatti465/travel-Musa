@@ -9,11 +9,11 @@ export async function GET(request: Request) {
     const view = searchParams.get("view");
 
     if (view === "bookings") {
-      const bookings = getAllBookingsWithDetails();
+      const bookings = await getAllBookingsWithDetails();
       return NextResponse.json({ bookings });
     }
 
-    const entries = getAllLedgerAdmin();
+    const entries = await getAllLedgerAdmin();
     return NextResponse.json({ entries });
   } catch (error: any) {
     return NextResponse.json({ error: error.message || "Unauthorized" }, { status: 401 });
@@ -26,7 +26,7 @@ export async function DELETE(request: Request) {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
     if (!id) return NextResponse.json({ error: "ID required" }, { status: 400 });
-    deleteLedgerEntry(Number(id));
+    await deleteLedgerEntry(Number(id));
     return NextResponse.json({ success: true });
   } catch (error: any) {
     return NextResponse.json({ error: error.message || "Failed to delete entry" }, { status: 500 });

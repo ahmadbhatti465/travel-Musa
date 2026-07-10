@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     const agent = await requireAgent();
     const formData = await request.formData();
 
-    updateAgentProfile(Number(agent.id), {
+    await updateAgentProfile(Number(agent.id), {
       agency_name: formData.get("agency_name") as string,
       contact_person: formData.get("contact_person") as string,
       phone: formData.get("phone") as string,

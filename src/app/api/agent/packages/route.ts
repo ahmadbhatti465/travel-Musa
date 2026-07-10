@@ -5,7 +5,7 @@ import { db } from "@/lib/db";
 export async function GET() {
   try {
     const agent = await requireAgent();
-    const packages = db
+    const packages = await db
       .prepare("SELECT * FROM umrah_packages WHERE agent_id = ? ORDER BY departure_date DESC")
       .all(agent.id);
     return NextResponse.json({ packages });
@@ -26,7 +26,7 @@ export async function POST(request: Request) {
         sharing_price, double_price, triple_price, quad_price, quint_price, agent_id
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
-    const result = stmt.run(
+    const result = await stmt.run(
       data.title,
       data.airline,
       data.departure_date,
@@ -63,7 +63,7 @@ export async function PUT(request: Request) {
     }
 
     // Verify the package belongs to this agent
-    const existing = db.prepare("SELECT * FROM umrah_packages WHERE id = ? AND agent_id = ?").get(id, agent.id) as any;
+    const existing = await db.prepare("SELECT * FROM umrah_packages WHERE id = ? AND agent_id = ?").get(id, agent.id) as any;
     if (!existing) {
       return NextResponse.json({ error: "Package not found or not owned by you" }, { status: 403 });
     }
@@ -75,7 +75,7 @@ export async function PUT(request: Request) {
         image_url = ?, sharing_price = ?, double_price = ?, triple_price = ?, quad_price = ?, quint_price = ?
       WHERE id = ? AND agent_id = ?
     `);
-    stmt.run(
+    await stmt.run(
       fields.title,
       fields.airline,
       fields.departure_date,
@@ -110,12 +110,12 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: "ID required" }, { status: 400 });
     }
 
-    const existing = db.prepare("SELECT * FROM umrah_packages WHERE id = ? AND agent_id = ?").get(Number(id), agent.id) as any;
+    const existing = await db.prepare("SELECT * FROM umrah_packages WHERE id = ? AND agent_id = ?").get(Number(id), agent.id) as any;
     if (!existing) {
       return NextResponse.json({ error: "Package not found or not owned by you" }, { status: 403 });
     }
 
-    db.prepare("DELETE FROM umrah_packages WHERE id = ? AND agent_id = ?").run(Number(id), agent.id);
+    await db.prepare("DELETE FROM umrah_packages WHERE id = ? AND agent_id = ?").run(Number(id), agent.id);
     return NextResponse.json({ success: true });
   } catch (error: any) {
     return NextResponse.json({ error: error.message || "Failed" }, { status: 500 });

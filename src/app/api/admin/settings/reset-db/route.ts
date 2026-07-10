@@ -5,8 +5,8 @@ import { initDb, seedDb } from "@/lib/db";
 export async function POST() {
   try {
     await requireAdmin();
-    initDb();
-    seedDb();
+    await initDb();
+    await seedDb();
     return NextResponse.json({ success: true });
   } catch (error: any) {
     return NextResponse.json({ error: error.message || "Failed to reset database" }, { status: 500 });

@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     const reference = formData.get("reference") as string;
     const notes = formData.get("notes") as string;
 
-    db.prepare(`
+    await db.prepare(`
       INSERT INTO payments (agent_id, amount, method, status, reference, notes)
       VALUES (?, ?, ?, ?, ?, ?)
     `).run(Number(agent.id), amount, method, "pending", reference, notes);

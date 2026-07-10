@@ -3,7 +3,7 @@ import { getUmrahPackages } from "@/lib/data";
 
 export async function GET() {
   try {
-    const packages = getUmrahPackages();
+    const packages = await getUmrahPackages();
     return NextResponse.json({ packages });
   } catch (error: any) {
     return NextResponse.json({ error: error.message || "Failed" }, { status: 500 });

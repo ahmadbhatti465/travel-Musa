@@ -5,7 +5,7 @@ import { db } from "@/lib/db";
 export async function GET() {
   try {
     await requireAgent();
-    const tickets = db
+    const tickets = await db
       .prepare("SELECT * FROM tickets WHERE status = 'active' ORDER BY departure_date ASC")
       .all();
     return NextResponse.json({ tickets });

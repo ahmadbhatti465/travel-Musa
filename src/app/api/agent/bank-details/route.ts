@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     const iban = formData.get("iban") as string;
     const branch = formData.get("branch") as string;
 
-    db.prepare(`
+    await db.prepare(`
       INSERT INTO bank_details (agent_id, bank_name, account_title, account_number, iban, branch)
       VALUES (?, ?, ?, ?, ?, ?)
     `).run(Number(agent.id), bank_name, account_title, account_number, iban, branch);

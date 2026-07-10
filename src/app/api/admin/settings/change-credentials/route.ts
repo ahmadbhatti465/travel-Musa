@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     const admin = await requireAdmin();
     const { currentPassword, username, email, newPassword, confirmPassword } = await request.json();
 
-    const existing = db.prepare("SELECT * FROM admins WHERE id = ? AND password = ?").get(Number(admin.id), currentPassword) as any;
+    const existing = await db.prepare("SELECT * FROM admins WHERE id = ? AND password = ?").get(Number(admin.id), currentPassword) as any;
     if (!existing) {
       return NextResponse.json({ error: "Current password is incorrect" }, { status: 400 });
     }
@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     const values: any[] = [];
 
     if (username && username !== existing.username) {
-      const dup = db.prepare("SELECT id FROM admins WHERE username = ? AND id != ?").get(username, Number(admin.id)) as any;
+      const dup = await db.prepare("SELECT id FROM admins WHERE username = ? AND id != ?").get(username, Number(admin.id)) as any;
       if (dup) {
         return NextResponse.json({ error: "Username already taken" }, { status: 400 });
       }
@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     }
 
     if (email && email !== existing.email) {
-      const dup = db.prepare("SELECT id FROM admins WHERE email = ? AND id != ?").get(email, Number(admin.id)) as any;
+      const dup = await db.prepare("SELECT id FROM admins WHERE email = ? AND id != ?").get(email, Number(admin.id)) as any;
       if (dup) {
         return NextResponse.json({ error: "Email already taken" }, { status: 400 });
       }
@@ -50,7 +50,7 @@ export async function POST(request: Request) {
     }
 
     values.push(Number(admin.id));
-    db.prepare(`UPDATE admins SET ${updates.join(", ")} WHERE id = ?`).run(...values);
+    await db.prepare(`UPDATE admins SET ${updates.join(", ")} WHERE id = ?`).run(...values);
 
     return NextResponse.json({ success: true });
   } catch (error: any) {

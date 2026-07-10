@@ -1,35 +1,35 @@
 import { db } from './db';
 
-export function getDashboardStats() {
-  const agents = db.prepare('SELECT COUNT(*) as count FROM agents').get() as { count: number };
-  const packages = db.prepare('SELECT COUNT(*) as count FROM umrah_packages').get() as { count: number };
-  const bookings = db.prepare('SELECT COUNT(*) as count FROM bookings').get() as { count: number };
-  const payments = db.prepare('SELECT COUNT(*) as count FROM payments').get() as { count: number };
-  const tickets = db.prepare('SELECT COUNT(*) as count FROM tickets').get() as { count: number };
-  const totalRevenue = db.prepare('SELECT COALESCE(SUM(total_amount), 0) as total FROM bookings').get() as { total: number };
-  const totalPaid = db.prepare('SELECT COALESCE(SUM(amount), 0) as total FROM payments WHERE status = ?').get('approved') as { total: number };
-  const contacts = db.prepare('SELECT COUNT(*) as count FROM contacts').get() as { count: number };
+export async function getDashboardStats() {
+  const agents = await db.prepare('SELECT COUNT(*) as count FROM agents').get() as any;
+  const packages = await db.prepare('SELECT COUNT(*) as count FROM umrah_packages').get() as any;
+  const bookings = await db.prepare('SELECT COUNT(*) as count FROM bookings').get() as any;
+  const payments = await db.prepare('SELECT COUNT(*) as count FROM payments').get() as any;
+  const tickets = await db.prepare('SELECT COUNT(*) as count FROM tickets').get() as any;
+  const totalRevenue = await db.prepare('SELECT COALESCE(SUM(total_amount), 0) as total FROM bookings').get() as any;
+  const totalPaid = await db.prepare('SELECT COALESCE(SUM(amount), 0) as total FROM payments WHERE status = ?').get('approved') as any;
+  const contacts = await db.prepare('SELECT COUNT(*) as count FROM contacts').get() as any;
   return {
-    agents: agents.count,
-    packages: packages.count,
-    bookings: bookings.count,
-    payments: payments.count,
-    tickets: tickets.count,
-    revenue: totalRevenue.total,
-    totalPaid: totalPaid.total,
-    contacts: contacts.count,
+    agents: agents?.count ?? 0,
+    packages: packages?.count ?? 0,
+    bookings: bookings?.count ?? 0,
+    payments: payments?.count ?? 0,
+    tickets: tickets?.count ?? 0,
+    revenue: totalRevenue?.total ?? 0,
+    totalPaid: totalPaid?.total ?? 0,
+    contacts: contacts?.count ?? 0,
   };
 }
 
-export function getAllAgents() {
+export async function getAllAgents() {
   return db.prepare('SELECT * FROM agents ORDER BY created_at DESC').all();
 }
 
-export function getAgentById(id: number) {
+export async function getAgentById(id: number) {
   return db.prepare('SELECT * FROM agents WHERE id = ?').get(id);
 }
 
-export function createAgent(data: any) {
+export async function createAgent(data: any) {
   const stmt = db.prepare(`
     INSERT INTO agents (code, email, password, agency_name, contact_person, phone, city, country, balance)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -37,27 +37,27 @@ export function createAgent(data: any) {
   return stmt.run(data.code, data.email, data.password, data.agency_name, data.contact_person, data.phone, data.city, data.country, data.balance || 0);
 }
 
-export function updateAgent(id: number, data: any) {
+export async function updateAgent(id: number, data: any) {
   if (data.password && data.password.trim() !== "") {
     const stmt = db.prepare(`
       UPDATE agents SET code = ?, email = ?, password = ?, agency_name = ?, contact_person = ?, phone = ?, city = ?, country = ?, balance = ?
       WHERE id = ?
     `);
-    stmt.run(data.code, data.email, data.password, data.agency_name, data.contact_person, data.phone, data.city, data.country, data.balance, id);
+    await stmt.run(data.code, data.email, data.password, data.agency_name, data.contact_person, data.phone, data.city, data.country, data.balance, id);
   } else {
     const stmt = db.prepare(`
       UPDATE agents SET code = ?, email = ?, agency_name = ?, contact_person = ?, phone = ?, city = ?, country = ?, balance = ?
       WHERE id = ?
     `);
-    stmt.run(data.code, data.email, data.agency_name, data.contact_person, data.phone, data.city, data.country, data.balance, id);
+    await stmt.run(data.code, data.email, data.agency_name, data.contact_person, data.phone, data.city, data.country, data.balance, id);
   }
 }
 
-export function deleteAgent(id: number) {
+export async function deleteAgent(id: number) {
   return db.prepare('DELETE FROM agents WHERE id = ?').run(id);
 }
 
-export function getAllUmrahPackages() {
+export async function getAllUmrahPackages() {
   return db.prepare(`
     SELECT p.*, a.agency_name as agent_name
     FROM umrah_packages p
@@ -66,7 +66,7 @@ export function getAllUmrahPackages() {
   `).all();
 }
 
-export function createUmrahPackage(data: any) {
+export async function createUmrahPackage(data: any) {
   const stmt = db.prepare(`
     INSERT INTO umrah_packages (title, airline, departure_date, return_date, days, price, visa_price, hotel_makkah, hotel_madina, status, image_url, sharing_price, double_price, triple_price, quad_price, quint_price)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -74,23 +74,23 @@ export function createUmrahPackage(data: any) {
   return stmt.run(data.title, data.airline, data.departure_date, data.return_date, data.days, data.price, data.visa_price || 0, data.hotel_makkah, data.hotel_madina, data.status || 'active', data.image_url || '', data.sharing_price || 0, data.double_price || 0, data.triple_price || 0, data.quad_price || 0, data.quint_price || 0);
 }
 
-export function updateUmrahPackage(id: number, data: any) {
+export async function updateUmrahPackage(id: number, data: any) {
   const stmt = db.prepare(`
     UPDATE umrah_packages SET title = ?, airline = ?, departure_date = ?, return_date = ?, days = ?, price = ?, visa_price = ?, hotel_makkah = ?, hotel_madina = ?, status = ?, image_url = ?, sharing_price = ?, double_price = ?, triple_price = ?, quad_price = ?, quint_price = ?
     WHERE id = ?
   `);
-  stmt.run(data.title, data.airline, data.departure_date, data.return_date, data.days, data.price, data.visa_price, data.hotel_makkah, data.hotel_madina, data.status, data.image_url || '', data.sharing_price || 0, data.double_price || 0, data.triple_price || 0, data.quad_price || 0, data.quint_price || 0, id);
+  await stmt.run(data.title, data.airline, data.departure_date, data.return_date, data.days, data.price, data.visa_price, data.hotel_makkah, data.hotel_madina, data.status, data.image_url || '', data.sharing_price || 0, data.double_price || 0, data.triple_price || 0, data.quad_price || 0, data.quint_price || 0, id);
 }
 
-export function deleteUmrahPackage(id: number) {
+export async function deleteUmrahPackage(id: number) {
   return db.prepare('DELETE FROM umrah_packages WHERE id = ?').run(id);
 }
 
-export function getAllOneWayGroups() {
+export async function getAllOneWayGroups() {
   return db.prepare('SELECT * FROM one_way_groups ORDER BY departure_date DESC').all();
 }
 
-export function createOneWayGroup(data: any) {
+export async function createOneWayGroup(data: any) {
   const stmt = db.prepare(`
     INSERT INTO one_way_groups (title, destination, departure_date, return_date, airline, price, seats, available_seats, status)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -98,23 +98,23 @@ export function createOneWayGroup(data: any) {
   return stmt.run(data.title, data.destination, data.departure_date, data.return_date, data.airline, data.price, data.seats, data.available_seats, data.status || 'active');
 }
 
-export function updateOneWayGroup(id: number, data: any) {
+export async function updateOneWayGroup(id: number, data: any) {
   const stmt = db.prepare(`
     UPDATE one_way_groups SET title = ?, destination = ?, departure_date = ?, return_date = ?, airline = ?, price = ?, seats = ?, available_seats = ?, status = ?
     WHERE id = ?
   `);
-  stmt.run(data.title, data.destination, data.departure_date, data.return_date, data.airline, data.price, data.seats, data.available_seats, data.status, id);
+  await stmt.run(data.title, data.destination, data.departure_date, data.return_date, data.airline, data.price, data.seats, data.available_seats, data.status, id);
 }
 
-export function deleteOneWayGroup(id: number) {
+export async function deleteOneWayGroup(id: number) {
   return db.prepare('DELETE FROM one_way_groups WHERE id = ?').run(id);
 }
 
-export function getAllUmrahGroups() {
+export async function getAllUmrahGroups() {
   return db.prepare('SELECT * FROM umrah_groups ORDER BY departure_date DESC').all();
 }
 
-export function createUmrahGroup(data: any) {
+export async function createUmrahGroup(data: any) {
   const stmt = db.prepare(`
     INSERT INTO umrah_groups (title, departure_date, return_date, airline, price, days, seats, available_seats, status)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -122,23 +122,23 @@ export function createUmrahGroup(data: any) {
   return stmt.run(data.title, data.departure_date, data.return_date, data.airline, data.price, data.days, data.seats, data.available_seats, data.status || 'active');
 }
 
-export function updateUmrahGroup(id: number, data: any) {
+export async function updateUmrahGroup(id: number, data: any) {
   const stmt = db.prepare(`
     UPDATE umrah_groups SET title = ?, departure_date = ?, return_date = ?, airline = ?, price = ?, days = ?, seats = ?, available_seats = ?, status = ?
     WHERE id = ?
   `);
-  stmt.run(data.title, data.departure_date, data.return_date, data.airline, data.price, data.days, data.seats, data.available_seats, data.status, id);
+  await stmt.run(data.title, data.departure_date, data.return_date, data.airline, data.price, data.days, data.seats, data.available_seats, data.status, id);
 }
 
-export function deleteUmrahGroup(id: number) {
+export async function deleteUmrahGroup(id: number) {
   return db.prepare('DELETE FROM umrah_groups WHERE id = ?').run(id);
 }
 
-export function getAllHotels() {
+export async function getAllHotels() {
   return db.prepare('SELECT * FROM hotels ORDER BY created_at DESC').all();
 }
 
-export function createHotel(data: any) {
+export async function createHotel(data: any) {
   const stmt = db.prepare(`
     INSERT INTO hotels (name, city, rating, address, distance)
     VALUES (?, ?, ?, ?, ?)
@@ -146,23 +146,23 @@ export function createHotel(data: any) {
   return stmt.run(data.name, data.city, data.rating, data.address, data.distance);
 }
 
-export function updateHotel(id: number, data: any) {
+export async function updateHotel(id: number, data: any) {
   const stmt = db.prepare(`
     UPDATE hotels SET name = ?, city = ?, rating = ?, address = ?, distance = ?
     WHERE id = ?
   `);
-  stmt.run(data.name, data.city, data.rating, data.address, data.distance, id);
+  await stmt.run(data.name, data.city, data.rating, data.address, data.distance, id);
 }
 
-export function deleteHotel(id: number) {
+export async function deleteHotel(id: number) {
   return db.prepare('DELETE FROM hotels WHERE id = ?').run(id);
 }
 
-export function getAllHotelRates() {
+export async function getAllHotelRates() {
   return db.prepare('SELECT r.*, h.name as hotel_name, h.city FROM hotel_rates r JOIN hotels h ON r.hotel_id = h.id ORDER BY r.id DESC').all();
 }
 
-export function createHotelRate(data: any) {
+export async function createHotelRate(data: any) {
   const stmt = db.prepare(`
     INSERT INTO hotel_rates (hotel_id, date_from, date_to, sharing_price, double_price, triple_price, quad_price, quint_price)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
@@ -170,19 +170,19 @@ export function createHotelRate(data: any) {
   return stmt.run(data.hotel_id, data.date_from, data.date_to, data.sharing_price, data.double_price, data.triple_price, data.quad_price, data.quint_price);
 }
 
-export function updateHotelRate(id: number, data: any) {
+export async function updateHotelRate(id: number, data: any) {
   const stmt = db.prepare(`
     UPDATE hotel_rates SET hotel_id = ?, date_from = ?, date_to = ?, sharing_price = ?, double_price = ?, triple_price = ?, quad_price = ?, quint_price = ?
     WHERE id = ?
   `);
-  stmt.run(data.hotel_id, data.date_from, data.date_to, data.sharing_price, data.double_price, data.triple_price, data.quad_price, data.quint_price, id);
+  await stmt.run(data.hotel_id, data.date_from, data.date_to, data.sharing_price, data.double_price, data.triple_price, data.quad_price, data.quint_price, id);
 }
 
-export function deleteHotelRate(id: number) {
+export async function deleteHotelRate(id: number) {
   return db.prepare('DELETE FROM hotel_rates WHERE id = ?').run(id);
 }
 
-export function getAllBookings() {
+export async function getAllBookings() {
   return db.prepare(`
     SELECT b.*, COALESCE(a.agency_name, 'Direct Client') as agent_name
     FROM bookings b
@@ -191,7 +191,7 @@ export function getAllBookings() {
   `).all();
 }
 
-export function getAllBookingsWithDetails() {
+export async function getAllBookingsWithDetails() {
   return db.prepare(`
     SELECT
       b.id,
@@ -251,15 +251,15 @@ export function getAllBookingsWithDetails() {
   `).all();
 }
 
-export function updateBookingStatus(id: number, status: string) {
+export async function updateBookingStatus(id: number, status: string) {
   return db.prepare('UPDATE bookings SET status = ? WHERE id = ?').run(status, id);
 }
 
-export function deleteBooking(id: number) {
+export async function deleteBooking(id: number) {
   return db.prepare('DELETE FROM bookings WHERE id = ?').run(id);
 }
 
-export function getAllPayments() {
+export async function getAllPayments() {
   return db.prepare(`
     SELECT p.*, a.agency_name as agent_name
     FROM payments p
@@ -268,27 +268,27 @@ export function getAllPayments() {
   `).all();
 }
 
-export function updatePaymentStatus(id: number, status: string) {
+export async function updatePaymentStatus(id: number, status: string) {
   return db.prepare('UPDATE payments SET status = ? WHERE id = ?').run(status, id);
 }
 
-export function deletePayment(id: number) {
+export async function deletePayment(id: number) {
   return db.prepare('DELETE FROM payments WHERE id = ?').run(id);
 }
 
-export function getAllContacts() {
+export async function getAllContacts() {
   return db.prepare('SELECT * FROM contacts ORDER BY created_at DESC').all();
 }
 
-export function deleteContact(id: number) {
+export async function deleteContact(id: number) {
   return db.prepare('DELETE FROM contacts WHERE id = ?').run(id);
 }
 
-export function getAllDownloadsAdmin() {
+export async function getAllDownloadsAdmin() {
   return db.prepare('SELECT * FROM downloads ORDER BY created_at DESC').all();
 }
 
-export function createDownload(data: any) {
+export async function createDownload(data: any) {
   const stmt = db.prepare(`
     INSERT INTO downloads (title, file_url, category)
     VALUES (?, ?, ?)
@@ -296,19 +296,19 @@ export function createDownload(data: any) {
   return stmt.run(data.title, data.file_url, data.category);
 }
 
-export function updateDownload(id: number, data: any) {
+export async function updateDownload(id: number, data: any) {
   const stmt = db.prepare(`
     UPDATE downloads SET title = ?, file_url = ?, category = ?
     WHERE id = ?
   `);
-  stmt.run(data.title, data.file_url, data.category, id);
+  await stmt.run(data.title, data.file_url, data.category, id);
 }
 
-export function deleteDownload(id: number) {
+export async function deleteDownload(id: number) {
   return db.prepare('DELETE FROM downloads WHERE id = ?').run(id);
 }
 
-export function getAllLedgerAdmin() {
+export async function getAllLedgerAdmin() {
   return db.prepare(`
     SELECT l.*, a.agency_name as agent_name
     FROM ledger l
@@ -317,15 +317,15 @@ export function getAllLedgerAdmin() {
   `).all();
 }
 
-export function deleteLedgerEntry(id: number) {
+export async function deleteLedgerEntry(id: number) {
   return db.prepare('DELETE FROM ledger WHERE id = ?').run(id);
 }
 
-export function getAllTickets() {
+export async function getAllTickets() {
   return db.prepare('SELECT * FROM tickets ORDER BY departure_date DESC').all();
 }
 
-export function createTicket(data: any) {
+export async function createTicket(data: any) {
   const stmt = db.prepare(`
     INSERT INTO tickets (airline, flight_no, from_city, to_city, departure_date, departure_time, return_date, return_time, class, ticket_type, price, seats, available_seats, status, notes)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -349,12 +349,12 @@ export function createTicket(data: any) {
   );
 }
 
-export function updateTicket(id: number, data: any) {
+export async function updateTicket(id: number, data: any) {
   const stmt = db.prepare(`
     UPDATE tickets SET airline = ?, flight_no = ?, from_city = ?, to_city = ?, departure_date = ?, departure_time = ?, return_date = ?, return_time = ?, class = ?, ticket_type = ?, price = ?, seats = ?, available_seats = ?, status = ?, notes = ?
     WHERE id = ?
   `);
-  stmt.run(
+  await stmt.run(
     data.airline,
     data.flight_no,
     data.from_city,
@@ -374,6 +374,6 @@ export function updateTicket(id: number, data: any) {
   );
 }
 
-export function deleteTicket(id: number) {
+export async function deleteTicket(id: number) {
   return db.prepare('DELETE FROM tickets WHERE id = ?').run(id);
 }

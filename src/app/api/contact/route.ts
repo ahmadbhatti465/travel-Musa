@@ -13,7 +13,7 @@ export async function POST(request: Request) {
       );
     }
 
-    createContact({ name, email, phone: phone || "", subject, message });
+    await createContact({ name, email, phone: phone || "", subject, message });
     return NextResponse.json({ success: true });
   } catch (error: any) {
     return NextResponse.json(

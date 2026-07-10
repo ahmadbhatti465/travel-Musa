@@ -11,7 +11,7 @@ export async function GET(request: Request) {
     const params: any[] = [agent.id];
     if (type) { sql += ' AND type = ?'; params.push(type); }
     sql += ' ORDER BY created_at DESC';
-    const bookings = db.prepare(sql).all(...params);
+    const bookings = await db.prepare(sql).all(...params);
     return NextResponse.json({ bookings });
   } catch (error: any) {
     return NextResponse.json({ error: error.message || "Failed" }, { status: 500 });
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
 
     let totalAmount = 0;
     if (ticket_id) {
-      const ticket = db.prepare("SELECT price, available_seats FROM tickets WHERE id = ? AND status = 'active'").get(ticket_id) as any;
+      const ticket = await db.prepare("SELECT price, available_seats FROM tickets WHERE id = ? AND status = 'active'").get(ticket_id) as any;
       if (!ticket) {
         return NextResponse.json({ error: "Ticket not found or inactive" }, { status: 400 });
       }
@@ -45,13 +45,13 @@ export async function POST(request: Request) {
     } else if (group_id) {
       let group;
       if (type === "umrah") {
-        group = db.prepare("SELECT price FROM umrah_groups WHERE id = ?").get(group_id) as any;
+        group = await db.prepare("SELECT price FROM umrah_groups WHERE id = ?").get(group_id) as any;
       } else {
-        group = db.prepare("SELECT price FROM one_way_groups WHERE id = ?").get(group_id) as any;
+        group = await db.prepare("SELECT price FROM one_way_groups WHERE id = ?").get(group_id) as any;
       }
       totalAmount = (group?.price || 0) * adults;
     } else if (package_id) {
-      const pkg = db.prepare("SELECT price, sharing_price, double_price, triple_price, quad_price, quint_price FROM umrah_packages WHERE id = ?").get(package_id) as any;
+      const pkg = await db.prepare("SELECT price, sharing_price, double_price, triple_price, quad_price, quint_price FROM umrah_packages WHERE id = ?").get(package_id) as any;
       let unitPrice = pkg?.price || 0;
       if (roomType === "sharing") unitPrice = pkg?.sharing_price || pkg?.price || 0;
       else if (roomType === "double") unitPrice = pkg?.double_price || pkg?.price || 0;
@@ -63,13 +63,13 @@ export async function POST(request: Request) {
 
     const refId = "REF-" + Math.random().toString(36).substring(2, 8).toUpperCase();
 
-    db.prepare(`
+    await db.prepare(`
       INSERT INTO bookings (agent_id, type, reference_id, package_id, group_id, ticket_id, adults, infants, total_amount, status, room_type)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(Number(agent.id), type, refId, package_id, group_id, ticket_id, adults, infants, totalAmount, "pending", roomType);
 
     if (ticket_id) {
-      db.prepare("UPDATE tickets SET available_seats = available_seats - ? WHERE id = ?").run(adults, ticket_id);
+      await db.prepare("UPDATE tickets SET available_seats = available_seats - ? WHERE id = ?").run(adults, ticket_id);
     }
 
     return NextResponse.json({ success: true, reference_id: refId, total_amount: totalAmount });
